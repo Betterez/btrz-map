@@ -1,0 +1,26 @@
+{
+  "name": "btrz-map",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/btrz-map.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Betterez/btrz-map.git"
+  },
+  "author": "Betterez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Betterez/btrz-map/issues"
+  },
+  "homepage": "https://github.com/Betterez/btrz-map#readme",
+  "devDependencies": {
+    "eslint": "8.2.0",
+    "eslint-config-btrz-base": "1.0.0",
+    "webpack": "5.64.1",
+    "webpack-cli": "4.9.1"
+  }
+}
