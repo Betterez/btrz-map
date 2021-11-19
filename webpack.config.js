@@ -10,4 +10,12 @@ module.exports = {
       type: "umd"
     }
   },
+  externals: {
+    leaflet: {
+      commonjs: 'leaflet',
+      commonjs2: 'leaflet',
+      amd: 'leaflet',
+      root: 'L',
+    },
+  },
 };
