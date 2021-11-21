@@ -18,6 +18,7 @@ export function init() {
  *  routeId: string,
  *  scheduleId: string,
  *  tripDate: string,
+ *  env: string // one of ["production", "sandbox"]. Defaults to sandbox.
  * };
  *
  * type TripOptions = {
