@@ -1,6 +1,9 @@
 import L from "leaflet";
+import {getScannerAppLocation} from "src/btrzAPIs/gps"
+import {getStationsFromIds} from "src/btrzAPIs/inventory"
 
-export function init() {
+
+export function init({containerId, tilesProviderUrl, options}) {
   if (!L) {
     console.log("leaftlet dependency is missing!");
     return;
