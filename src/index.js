@@ -24,7 +24,7 @@ export function init({containerId, tilesProviderUrl, options}) {
  *  env: string // one of ["production", "sandbox"]. Defaults to sandbox.
  * };
  *
- * type TripOptions = {
+ * type TripRenderOptions = {
  *   travelledPathColor: string,
  * }
  *
@@ -33,19 +33,20 @@ export function init({containerId, tilesProviderUrl, options}) {
  * }
  *
  * // Initializes the map with the proper tiles
- * const map = btrzMap.init({containerId: string, tilesProviderUrl: string, options: MapOptions});
+ * // Returns a leaftlet Map
+ * const map = btrzMap.map({containerId: string, tilesProviderUrl: string, options: MapOptions});
+ *
+ * //Get the trip information with all the needed data to display it on a map
+ * // Returns a promise which will resolve with the trip when is ready or reject if there was a problem
+ * const trip = await btrzMap.trip({btzOptions: BtrzOptions, tripRenderOptions: TripRenderOptions});
  *
  * // Renders the map and show the data associated with the trip: Stations & Bus Live Position
  * // A map can only be associated to one trip.
  * // The map will center on the bus position. If bus position is not available, it will center on first station.
- * // Returns a promise which will resolve when the trip is ready to be shown or reject if there was a problem
  * // (like trip not found)
- * map.addTrip(btzOptions: BtrzOptions, tripOptions: TripOptions);
+ * trip.addTo(map: Map);
  *
  * // When you no longer need to show the trip, make sure to call this method to stop listening live data for the trip
  * // This will free resources and avoid memory leaks.
- * map.removeTrip();
- *
- * // This will remove the map tiles from your container
- * map.destroy();
+ * trip.removeFrom(map: Map);
  */
