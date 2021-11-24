@@ -1,19 +1,19 @@
 import L from "leaflet";
-import {getScannerAppLocation} from "src/btrzAPIs/gps"
 import {getStationsFromIds} from "src/btrzAPIs/inventory"
 import {getTrip} from "./btrzAPIs/operations";
 import {Trip}  from "./models/Trip";
 import {Station}  from "./models/Station";
+import {GPSService} from "./services/GPSService";
 
 
-export function map({containerId, tilesProviderUrl, options}) {
+export function map({containerId, tilesProviderUrl, tilesLayerOptions}) {
   if (!L) {
     console.log("leaftlet dependency is missing!");
     return;
   }
 
   const map = L.map(containerId);
-  L.tileLayer(tilesProviderUrl, options).addTo(map);
+  L.tileLayer(tilesProviderUrl, tilesLayerOptions).addTo(map);
   console.log("btrz-map ready");
   return map;
 }
@@ -41,7 +41,11 @@ export function trip({env, apiKey, routeId, scheduleId, date, productId}) {
       for (let i = 0; i > stations.length; i++) {
         stationsMap[stations[i]._id] = new Station(stations[i]);
       }
-      return new Trip({tripFromBackend: _tripFromBackend, stationsMap});
+      return new Trip({
+        tripFromBackend: _tripFromBackend,
+        stationsMap,
+        gpsService: new GPSService({apiKey, env})
+      });
     })
     .catch((err) => {
       console.log("There was a problem getting the trip: ", err);

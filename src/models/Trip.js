@@ -2,13 +2,15 @@ import {TravelledPath} from "./TravelledPath";
 import {Bus} from "./Bus";
 
 export class Trip {
-  constructor({tripFromBackend, stationsMap}) {
+  constructor({tripFromBackend, stationsMap, gpsService}) {
     this.routeId = tripFromBackend.routeId;
     this.scheduleId = tripFromBackend.scheduleName;
     this.date = tripFromBackend.date;
     this.legs = tripFromBackend.legs;
     this.stationsMap = stationsMap;
     this.travelledPath = null;
+    this.gpsIntervalId = null;
+    this.gpsService = gpsService;
   }
 
   _addStationsTo(map) {
@@ -51,10 +53,55 @@ export class Trip {
     }
   }
 
-  addTo(map, location) {
+  _getFirstStation() {
+    const firstLeg = this.legs.find((l) => l.legord === 0);
+    return this.stationsMap[firstLeg.fromId];
+  }
+
+  _updatePosition(map) {
+    return this.gpsService.getScannerAppLocation({
+      routeId: this.routeId,
+      scheduleId: this.scheduleId,
+      date: this.date,
+      includeTravelledPath: true
+    })
+    .then((position) => {
+      if (position) {
+        if (position.travelledPath) {
+          this._addTravelledPathTo(map, position.travelledPath);
+        }
+
+        if (position.lastKnown) {
+          this._addBusTo(map, position.lastKnown);
+          map.setView([position.lastKnown.latitude, position.lastKnown.longitude], 14);
+        }
+      } else {
+        const firstStation = this._getFirstStation();
+        map.setView([firstStation.latitude, firstStation.longitude], 14);
+      }
+    });
+  }
+
+  _startLiveTracking(map) {
+    if (this.gpsIntervalId) {
+      this._stopLiveTracking();
+    }
+
+    this.gpsIntervalId = setInterval(() => {
+      this._updatePosition(map);
+    }, 10000);
+
+    return this._updatePosition(map);
+  }
+
+  _stopLiveTracking() {
+    clearInterval(this.gpsIntervalId);
+    this.gpsIntervalId = null;
+  }
+
+  addTo(map) {
     this._addStationsTo(map);
-    this._addTravelledPathTo(map, location.travelledPath);
-    this._addBusTo(map, location.lastKnown);
+    return this._startLiveTracking(map);
   }
 
   removeFrom(map) {
