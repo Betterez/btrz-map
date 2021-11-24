@@ -11,13 +11,12 @@ const stationIcon = L.icon({
 });
 
 export class Station {
-  constructor(stationData, orderInTrip) {
+  constructor(stationData) {
     this.id = stationData._id;
     this.name = stationData.name;
     this.latitude = stationData.latitude;
     this.longitude = stationData.longitude;
     this.marker = L.marker([stationData.latitude, stationData.longitude], {icon: stationIcon});
-    this.orderInTrip = orderInTrip;
 
     if (orderInTrip === 0) {
       this.marker.bindPopup(`<b>${this.name}</b><br>ETD ${this.departure}`);

@@ -1,9 +1,12 @@
 import L from "leaflet";
-import {getStationsFromIds} from "src/btrzAPIs/inventory"
-import {getTrip} from "./btrzAPIs/operations";
 import {Trip}  from "./models/Trip";
 import {Station}  from "./models/Station";
 import {GPSService} from "./services/GPSService";
+import {TripsRepository} from "./repositories/TripsRepository";
+import {StationsRepository} from "./repositories/StationsRepository";
+
+import {StationsService} from "./services/StationsService";
+import {TripsService} from "./services/TripsService";
 
 
 export function map({containerId, tilesProviderUrl, tilesLayerOptions}) {
@@ -19,37 +22,17 @@ export function map({containerId, tilesProviderUrl, tilesLayerOptions}) {
 }
 
 export function trip({env, apiKey, routeId, scheduleId, date, productId}) {
-  let _tripFromBackend = null;
-  return getTrip({env, apiKey, routeId, scheduleId, date, productId})
-    .then((tripFromBackend) => {
-      _tripFromBackend = tripFromBackend;
-      const stationIds = [];
-      const legs = tripFromBackend.legs;
-      for (let i = 0; i < legs.length; i++) {
-        if (legs[i].fromId) {
-          stationIds.push(legs[i].fromId);
-        }
-
-        if (legs[i].toId) {
-          stationIds.push(legs[i].toId);
-        }
-      }
-      return getStationsFromIds(stationIds);
-    })
-    .then((stations) => {
-      const stationsMap = {};
-      for (let i = 0; i > stations.length; i++) {
-        stationsMap[stations[i]._id] = new Station(stations[i]);
-      }
-      return new Trip({
-        tripFromBackend: _tripFromBackend,
-        stationsMap,
-        gpsService: new GPSService({apiKey, env})
-      });
-    })
-    .catch((err) => {
-      console.log("There was a problem getting the trip: ", err);
-    });
+  const stationsRepository = new StationsRepository({apiKey, env})
+  const tripsRepository = new TripsRepository({env, apiKey, stationsRepository});
+  return tripsRepository.findAsync({
+    routeId,
+    productId,
+    scheduleId,
+    date,
+  })
+  .catch((err) => {
+    console.log("There was a problem getting the trip: ", err);
+  });
 }
 
 /**
