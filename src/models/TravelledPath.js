@@ -7,7 +7,7 @@ const travelledPathRenderOptions = {
 export class TravelledPath {
   constructor(coordinates) {
     this.coordinates = coordinates;
-    this.polyline = L.polyline(coordinates, {color: "red"});
+    this.polyline = L.polyline(coordinates, travelledPathRenderOptions);
   }
 
   addTo(map) {

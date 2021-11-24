@@ -1,15 +1,51 @@
 import L from "leaflet";
 import {getScannerAppLocation} from "src/btrzAPIs/gps"
 import {getStationsFromIds} from "src/btrzAPIs/inventory"
+import {getTrip} from "./btrzAPIs/operations";
+import {Trip}  from "./models/Trip";
+import {Station}  from "./models/Station";
 
 
-export function init({containerId, tilesProviderUrl, options}) {
+export function map({containerId, tilesProviderUrl, options}) {
   if (!L) {
     console.log("leaftlet dependency is missing!");
     return;
   }
 
+  const map = L.map(containerId);
+  L.tileLayer(tilesProviderUrl, options).addTo(map);
   console.log("btrz-map ready");
+  return map;
+}
+
+export function trip({env, apiKey, routeId, scheduleId, date, productId}) {
+  let _tripFromBackend = null;
+  return getTrip({env, apiKey, routeId, scheduleId, date, productId})
+    .then((tripFromBackend) => {
+      _tripFromBackend = tripFromBackend;
+      const stationIds = [];
+      const legs = tripFromBackend.legs;
+      for (let i = 0; i < legs.length; i++) {
+        if (legs[i].fromId) {
+          stationIds.push(legs[i].fromId);
+        }
+
+        if (legs[i].toId) {
+          stationIds.push(legs[i].toId);
+        }
+      }
+      return getStationsFromIds(stationIds);
+    })
+    .then((stations) => {
+      const stationsMap = {};
+      for (let i = 0; i > stations.length; i++) {
+        stationsMap[stations[i]._id] = new Station(stations[i]);
+      }
+      return new Trip({tripFromBackend: _tripFromBackend, stationsMap});
+    })
+    .catch((err) => {
+      console.log("There was a problem getting the trip: ", err);
+    });
 }
 
 /**
@@ -21,6 +57,7 @@ export function init({containerId, tilesProviderUrl, options}) {
  *  routeId: string,
  *  scheduleId: string,
  *  tripDate: string,
+ *  productId: string TODO: see if API can do it without productId
  *  env: string // one of ["production", "sandbox"]. Defaults to sandbox.
  * };
  *

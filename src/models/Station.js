@@ -10,13 +10,14 @@ const stationIcon = L.icon({
   popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
-class Station {
+export class Station {
   constructor(stationData, orderInTrip) {
     this.id = stationData._id;
     this.name = stationData.name;
     this.latitude = stationData.latitude;
     this.longitude = stationData.longitude;
     this.marker = L.marker([stationData.latitude, stationData.longitude], {icon: stationIcon});
+    this.orderInTrip = orderInTrip;
 
     if (orderInTrip === 0) {
       this.marker.bindPopup(`<b>${this.name}</b><br>ETD ${this.departure}`);

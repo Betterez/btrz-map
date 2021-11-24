@@ -2,24 +2,27 @@ import {TravelledPath} from "./TravelledPath";
 import {Bus} from "./Bus";
 
 export class Trip {
-  constructor({routeId, scheduleId, date, stations}) {
-    this.routeId = routeId;
-    this.scheduleId = scheduleId;
-    this.date = date;
-    this.stations = stations;
+  constructor({tripFromBackend, stationsMap}) {
+    this.routeId = tripFromBackend.routeId;
+    this.scheduleId = tripFromBackend.scheduleName;
+    this.date = tripFromBackend.date;
+    this.legs = tripFromBackend.legs;
+    this.stationsMap = stationsMap;
     this.travelledPath = null;
   }
 
   _addStationsTo(map) {
-    for (let i = 0; i < this.stations.length; i++) {
-      const station = this.stations[i];
+    const keys = this.stationsMap.keys();
+    for (let i = 0; i < keys.length; i++) {
+      const station = this.stationsMap[keys[i]];
       station.addTo(map);
     }
   }
 
   _removeStationsFrom(map) {
-    for (let i = 0; i < this.stations.length; i++) {
-      const station = this.stations[i];
+    const keys = this.stationsMap.keys();
+    for (let i = 0; i < keys.length; i++) {
+      const station = this.stationsMap[keys[i]];
       station.removeFrom(map);
     }
   }
