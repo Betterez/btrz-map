@@ -3,6 +3,7 @@ import {TripsRepository} from "./repositories/TripsRepository";
 import {StationsRepository} from "./repositories/StationsRepository";
 import {StationsService} from "./services/StationsService";
 import {TripsService} from "./services/TripsService";
+import {GPSService} from "./services/GPSService";
 
 export function map({containerId, tilesProviderUrl, tilesLayerOptions}) {
   if (!L) {
@@ -17,10 +18,11 @@ export function map({containerId, tilesProviderUrl, tilesLayerOptions}) {
 }
 
 export function trip({env, apiKey, routeId, scheduleId, date, productId}) {
-  const stationsService = new StationsService({apiKey, env})
-  const tripsService = new TripsService({apiKey, env})
-  const stationsRepository = new StationsRepository({stationsService})
-  const tripsRepository = new TripsRepository({tripsService, stationsRepository});
+  const stationsService = new StationsService({apiKey, env});
+  const tripsService = new TripsService({apiKey, env});
+  const stationsRepository = new StationsRepository({stationsService});
+  const gpsService = new GPSService({apiKey, env});
+  const tripsRepository = new TripsRepository({tripsService, stationsRepository, gpsService});
 
   return tripsRepository.findAsync({
     routeId,

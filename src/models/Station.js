@@ -18,11 +18,11 @@ export class Station {
     this.longitude = stationData.longitude;
     this.marker = L.marker([stationData.latitude, stationData.longitude], {icon: stationIcon});
 
-    if (orderInTrip === 0) {
-      this.marker.bindPopup(`<b>${this.name}</b><br>ETD ${this.departure}`);
-    } else {
+    //if (orderInTrip === 0) {
+      //this.marker.bindPopup(`<b>${this.name}</b><br>ETD ${this.departure}`);
+    //} else {
       this.marker.bindPopup(`<b>${this.name}</b><br>ETA ${this.arrival}`);
-    }
+    //}
   }
 
   addTo(map) {

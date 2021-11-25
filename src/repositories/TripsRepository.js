@@ -2,9 +2,10 @@ import {Trip} from "../models/Trip";
 import {GPSService} from "../services/GPSService";
 
 export class TripsRepository {
-  constructor({stationsRepository, tripsService}) {
+  constructor({stationsRepository, tripsService, gpsService}) {
     this.tripsService = tripsService;
     this.stationsRepository = stationsRepository;
+    this.gpsService = gpsService;
   }
 
   findAsync({routeId, scheduleId, date, productId}) {
@@ -19,6 +20,7 @@ export class TripsRepository {
     .then((tripFromBackend) => {
       _tripFromBackend = tripFromBackend;
       const stationIds = [];
+      console.log("tripFromBackend: ", tripFromBackend)
       const legs = tripFromBackend.legs;
       for (let i = 0; i < legs.length; i++) {
         if (legs[i].fromId) {
@@ -30,7 +32,7 @@ export class TripsRepository {
         }
       }
 
-      return this.stationsRepository.findAsync(ids)
+      return this.stationsRepository.findAsync(stationIds);
     })
     .then((stations) => {
       const stationsMap = {};
@@ -41,7 +43,7 @@ export class TripsRepository {
       return new Trip({
         tripFromBackend: _tripFromBackend,
         stationsMap,
-        gpsService: new GPSService({apiKey, env})
+        gpsService: this.gpsService
       });
     })
   }

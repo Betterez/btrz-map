@@ -14,7 +14,7 @@ export class Trip {
   }
 
   _addStationsTo(map) {
-    const keys = this.stationsMap.keys();
+    const keys = Object.keys(this.stationsMap);
     for (let i = 0; i < keys.length; i++) {
       const station = this.stationsMap[keys[i]];
       station.addTo(map);
@@ -22,7 +22,7 @@ export class Trip {
   }
 
   _removeStationsFrom(map) {
-    const keys = this.stationsMap.keys();
+    const keys = Object.keys(this.stationsMap);
     for (let i = 0; i < keys.length; i++) {
       const station = this.stationsMap[keys[i]];
       station.removeFrom(map);
