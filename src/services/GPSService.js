@@ -12,6 +12,9 @@ export class GPSService {
       routeId, scheduleId, date, includeTravelledPath
     }
 
-    return this.client.gps.scannerAppLocation.get({token: this.apiKey, query});
+    return this.client.gps.scannerAppLocation.get({token: this.apiKey, query})
+      .then((response) => {
+        return response.data.location;
+      });
   }
 }

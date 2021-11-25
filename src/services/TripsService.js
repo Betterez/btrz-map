@@ -11,9 +11,13 @@ export class TripsService {
     const query = {
       routeId: routeId,
       scheduleId: scheduleId,
-      date: date,
+      from: date,
+      to: date,
       productId: productId
     }
-    return this.client.operations.outlookTrips.get({token: this.apiKey, query});
+    return this.client.operations.outlookTrips.get({token: this.apiKey, query})
+      .then((response) => {
+        return response.data.trips.length > 0 ? response.data.trips[0] : null;
+      });
   }
 }

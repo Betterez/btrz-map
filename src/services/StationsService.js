@@ -8,7 +8,20 @@ export class StationsService {
   }
 
   getStationsFromIds(stationIds) {
-    const query = {stationIds}
-    return this.client.inventory.stations.all({token: this.apiKey, query});
+    let stationIdsForAPI = "";
+
+    for (let i=0; i < stationIds.length; i++) {
+      if (i === stationIds.length - 1) {
+        stationIdsForAPI = stationIdsForAPI.concat(stationIds[i] + "");
+      } else {
+        stationIdsForAPI = stationIdsForAPI.concat(stationIds[i] + ",");
+      }
+    };
+
+    const query = {stationIds: stationIdsForAPI};
+    return this.client.inventory.stations.all({token: this.apiKey, query})
+      .then((response) => {
+        return response.data.stations;
+      });
   }
 }
