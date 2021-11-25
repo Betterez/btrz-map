@@ -1,5 +1,5 @@
 import btrzApi from "btrz-api-client";
-import {getConfig} from "./conf";
+import {getConfig} from "../btrzAPIs/conf";
 
 export class StationsService {
   constructor({apiKey, env}) {
