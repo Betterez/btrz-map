@@ -6,11 +6,39 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
     <script type='text/javascript' src="../dist/btrz-map.js"></script>
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
 </head>
 <body>
     <h1>Where is my bus?</h1>
+    <div id="map"></div>
 </body>
+<script type='text/javascript' src="businessData.js"></script>
 <script>
-  btrzMap.init();
+  const tilesProviderUrl = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}.png";
+  const tilesLayerOptions = {
+    attribution: "&copy; <a href=\"https://carto.com\">carto.com</a> contributors"
+  };
+  const map = btrzMap.map({
+    containerId: "map",
+    tilesProviderUrl,
+    tilesLayerOptions
+  });
+
+  let trip = null;
+  btrzMap.trip({
+    env: businessData.env,
+    apiKey: businessData.apiKey,
+    routeId: businessData.routeId,
+    scheduleId: businessData.scheduleId,
+    date: businessData.date,
+    productId: businessData.productId
+  }).then((_trip) => {
+    trip = _trip;
+    trip.addTo(map);
+  });
 </script>
 </html>
