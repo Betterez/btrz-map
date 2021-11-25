@@ -7,7 +7,12 @@ const travelledPathRenderOptions = {
 export class TravelledPath {
   constructor(coordinates) {
     this.coordinates = coordinates;
-    this.polyline = L.polyline(coordinates, travelledPathRenderOptions);
+    const positions = [];
+    for (let i = 0; i < coordinates.length; i++) {
+      const position = coordinates[i];
+      positions.push([position.latitude, position.longitude]);
+    }
+    this.polyline = L.polyline(positions, travelledPathRenderOptions);
   }
 
   addTo(map) {
