@@ -1,11 +1,9 @@
 import {Trip} from "../models/Trip";
-import {TripsService} from "../services/TripsService";
-import {Station} from "../models/Station";
 import {GPSService} from "../services/GPSService";
 
 export class TripsRepository {
-  constructor({env, apiKey, stationsRepository}) {
-    this.tripsService = new TripsService({env, apiKey});
+  constructor({stationsRepository, tripsService}) {
+    this.tripsService = tripsService;
     this.stationsRepository = stationsRepository;
   }
 

@@ -1,13 +1,8 @@
 import L from "leaflet";
-import {Trip}  from "./models/Trip";
-import {Station}  from "./models/Station";
-import {GPSService} from "./services/GPSService";
 import {TripsRepository} from "./repositories/TripsRepository";
 import {StationsRepository} from "./repositories/StationsRepository";
-
 import {StationsService} from "./services/StationsService";
 import {TripsService} from "./services/TripsService";
-
 
 export function map({containerId, tilesProviderUrl, tilesLayerOptions}) {
   if (!L) {
@@ -22,8 +17,11 @@ export function map({containerId, tilesProviderUrl, tilesLayerOptions}) {
 }
 
 export function trip({env, apiKey, routeId, scheduleId, date, productId}) {
-  const stationsRepository = new StationsRepository({apiKey, env})
-  const tripsRepository = new TripsRepository({env, apiKey, stationsRepository});
+  const stationsService = new StationsService({apiKey, env})
+  const tripsService = new TripsService({apiKey, env})
+  const stationsRepository = new StationsRepository({stationsService})
+  const tripsRepository = new TripsRepository({tripsService, stationsRepository});
+
   return tripsRepository.findAsync({
     routeId,
     productId,

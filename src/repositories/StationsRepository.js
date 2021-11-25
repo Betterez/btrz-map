@@ -1,9 +1,8 @@
 import {Station} from "../models/Station";
-import {StationsService} from "../services/StationsService";
 
 export class StationsRepository {
-  constructor({env, apiKey}) {
-    this.stationService = new StationsService({env, apiKey});
+  constructor({stationsService}) {
+    this.stationService = stationsService;
   }
 
   findAsync(ids) {
