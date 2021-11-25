@@ -58,7 +58,7 @@ export class Trip {
     return this.stationsMap[firstLeg.fromId];
   }
 
-  _updatePosition(map) {
+  _updatePosition(map, firstTime) {
     return this.gpsService.getScannerAppLocation({
       routeId: this.routeId,
       scheduleId: this.scheduleId,
@@ -73,7 +73,7 @@ export class Trip {
       if (position.lastKnown) {
         this._addBusTo(map, position.lastKnown);
         map.setView([position.lastKnown.latitude, position.lastKnown.longitude], 14);
-      } else {
+      } else if (firstTime) {
         const firstStation = this._getFirstStation();
         map.setView([firstStation.latitude, firstStation.longitude], 14);
       }
@@ -86,10 +86,10 @@ export class Trip {
     }
 
     this.gpsIntervalId = setInterval(() => {
-      this._updatePosition(map);
+      this._updatePosition(map, false);
     }, 10000);
 
-    return this._updatePosition(map);
+    return this._updatePosition(map, true);
   }
 
   _stopLiveTracking() {
