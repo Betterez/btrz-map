@@ -20,7 +20,6 @@ export class TripsRepository {
     .then((tripFromBackend) => {
       _tripFromBackend = tripFromBackend;
       const stationIds = [];
-      console.log("tripFromBackend: ", tripFromBackend)
       const legs = tripFromBackend.legs;
       for (let i = 0; i < legs.length; i++) {
         if (legs[i].fromId) {
@@ -36,10 +35,11 @@ export class TripsRepository {
     })
     .then((stations) => {
       const stationsMap = {};
-      for (let i = 0; i > stations.length; i++) {
+      for (let i = 0; i < stations.length; i++) {
         const currentStation = stations[i];
         stationsMap[currentStation.id] = currentStation;
       }
+
       return new Trip({
         tripFromBackend: _tripFromBackend,
         stationsMap,

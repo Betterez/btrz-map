@@ -66,15 +66,13 @@ export class Trip {
       includeTravelledPath: true
     })
     .then((position) => {
-      if (position) {
-        if (position.travelledPath) {
-          this._addTravelledPathTo(map, position.travelledPath);
-        }
+      if (position.travelledPath) {
+        this._addTravelledPathTo(map, position.travelledPath);
+      }
 
-        if (position.lastKnown) {
-          this._addBusTo(map, position.lastKnown);
-          map.setView([position.lastKnown.latitude, position.lastKnown.longitude], 14);
-        }
+      if (position.lastKnown) {
+        this._addBusTo(map, position.lastKnown);
+        map.setView([position.lastKnown.latitude, position.lastKnown.longitude], 14);
       } else {
         const firstStation = this._getFirstStation();
         map.setView([firstStation.latitude, firstStation.longitude], 14);

@@ -8,7 +8,7 @@ export class StationsRepository {
   findAsync(ids) {
     return this.stationService.getStationsFromIds(ids)
       .then((stationsFromBackend) => {
-           return stationsFromBackend.map((s) => new Station(s));
+        return stationsFromBackend.map((s) => new Station(s));
       })
   }
 }
