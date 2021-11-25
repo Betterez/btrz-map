@@ -12,10 +12,18 @@ module.exports = {
   },
   externals: {
     leaflet: {
-      commonjs: 'leaflet',
-      commonjs2: 'leaflet',
-      amd: 'leaflet',
-      root: 'L',
+      commonjs: "leaflet",
+      commonjs2: "leaflet",
+      amd: "leaflet",
+      root: "L",
     },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+    ],
   },
 };
