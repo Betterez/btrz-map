@@ -11,6 +11,7 @@ export class Trip {
     this.travelledPath = null;
     this.gpsIntervalId = null;
     this.gpsService = gpsService;
+    this.centerControl = null;
   }
 
   _addStationsTo(map) {
@@ -97,7 +98,28 @@ export class Trip {
     this.gpsIntervalId = null;
   }
 
+  _removeCenterButton(map) {
+    if (this.centerControl) {
+      this.centerControl.removeFrom(map);
+    }
+  }
+
+  _addCenterButton(map) {
+    this._removeCenterButton(map);
+
+    this.centerControl = L.control.centerButton({
+      position: "topleft"
+    });
+    this.centerControl.addTo(map);
+    this.centerControl.getContainer().onclick = () => {
+      console.log("user pressed center button");
+      //this.autoCenterEnabled = true;
+      //this.centerMap();
+    };
+  }
+
   addTo(map) {
+    this._addCenterButton(map);
     this._addStationsTo(map);
     return this._startLiveTracking(map);
   }
