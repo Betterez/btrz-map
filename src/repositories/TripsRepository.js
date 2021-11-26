@@ -20,14 +20,16 @@ export class TripsRepository {
     .then((tripFromBackend) => {
       _tripFromBackend = tripFromBackend;
       const stationIds = [];
-      const legs = tripFromBackend.legs;
-      for (let i = 0; i < legs.length; i++) {
-        if (legs[i].fromId) {
-          stationIds.push(legs[i].fromId);
+
+      const sortedLegs = tripFromBackend.legs.slice();
+      sortedLegs.sort((l1, l2) => l1.legord < l2.legord ? -1 : 1);
+      for (let i = 0; i < sortedLegs.length; i++) {
+        if (sortedLegs[i].fromId) {
+          stationIds.push(sortedLegs[i].fromId);
         }
 
-        if (legs[i].toId) {
-          stationIds.push(legs[i].toId);
+        if (sortedLegs[i].toId) {
+          stationIds.push(sortedLegs[i].toId);
         }
       }
 
