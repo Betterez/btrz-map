@@ -76,7 +76,7 @@ export class Trip {
     }
   }
 
-  _updatePosition(map, firstTime) {
+  _updatePosition(map) {
     return this.gpsService.getScannerAppLocation({
       routeId: this.routeId,
       scheduleId: this.scheduleId,
@@ -88,6 +88,10 @@ export class Trip {
 
       if (position.travelledPath) {
         this._addTravelledPathTo(map, position.travelledPath);
+      }
+
+      if (position.lastKnown) {
+        this._addBusTo(map, position.lastKnown);
       }
 
       if (this.autoCenterEnabled) {
