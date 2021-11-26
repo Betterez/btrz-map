@@ -18,9 +18,11 @@
   },
   "homepage": "https://github.com/Betterez/btrz-map#readme",
   "devDependencies": {
+    "css-loader": "6.5.1",
     "eslint": "8.2.0",
     "eslint-config-btrz-base": "1.0.0",
     "leaflet": "1.7.1",
+    "style-loader": "3.3.1",
     "webpack": "5.64.1",
     "webpack-cli": "4.9.1"
   },
