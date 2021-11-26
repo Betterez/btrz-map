@@ -12,6 +12,8 @@ export class Trip {
     this.gpsIntervalId = null;
     this.gpsService = gpsService;
     this.centerControl = null;
+    this.autoCenterEnabled =  true;
+    this.discardMovement = false
   }
 
   _addStationsTo(map) {
@@ -59,6 +61,21 @@ export class Trip {
     return this.stationsMap[firstLeg.fromId];
   }
 
+  _discardMovement() {
+    this.discardMovement = true;
+    setTimeout(() => this.discardMovement = false, 5000);
+  }
+
+  centerMap() {
+    this._discardMovement();
+    if (this.currentPosition && this.currentPosition.lastKnown) {
+      map.setView([this.currentPosition.lastKnown.latitude, this.currentPosition.lastKnown.longitude], 14);
+    } else {
+      const firstStation = this._getFirstStation();
+      map.setView([firstStation.latitude, firstStation.longitude], 14);
+    }
+  }
+
   _updatePosition(map, firstTime) {
     return this.gpsService.getScannerAppLocation({
       routeId: this.routeId,
@@ -67,16 +84,14 @@ export class Trip {
       includeTravelledPath: true
     })
     .then((position) => {
+      this.currentPosition = position;
+
       if (position.travelledPath) {
         this._addTravelledPathTo(map, position.travelledPath);
       }
 
-      if (position.lastKnown) {
-        this._addBusTo(map, position.lastKnown);
-        map.setView([position.lastKnown.latitude, position.lastKnown.longitude], 14);
-      } else if (firstTime) {
-        const firstStation = this._getFirstStation();
-        map.setView([firstStation.latitude, firstStation.longitude], 14);
+      if (this.autoCenterEnabled) {
+        this.centerMap();
       }
     });
   }
@@ -113,15 +128,23 @@ export class Trip {
     this.centerControl.addTo(map);
     this.centerControl.getContainer().onclick = () => {
       console.log("user pressed center button");
-      //this.autoCenterEnabled = true;
-      //this.centerMap();
+      this.autoCenterEnabled = true;
+      this.centerMap();
     };
   }
 
   addTo(map) {
     this._addCenterButton(map);
     this._addStationsTo(map);
-    return this._startLiveTracking(map);
+    return this._startLiveTracking(map)
+      .then(() => {
+        map.on("movestart", () => {
+          if (!this.discardMovement) {
+            console.log("movestart");
+            this.autoCenterEnabled = false;
+          }
+        });
+      });
   }
 
   removeFrom(map) {
