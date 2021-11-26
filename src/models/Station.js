@@ -1,35 +1,32 @@
 import L from "leaflet";
 import LeafIcon from '../images/leaf-green.png';
 import LeafShadowIcon from '../images/leaf-shadow.png';
+import origin from '../images/origin.png';
+import origin2x from '../images/origin-2x.png';
+import station from '../images/station.png';
+import station2x from '../images/station-2x.png';
+import destination from '../images/destination.png';
+import destination2x from '../images/destination-2x.png';
 
 const stationIcon = L.icon({
-  iconUrl: LeafIcon,
-  shadowUrl: LeafShadowIcon,
-  iconSize:     [38, 95], // size of the icon
-  shadowSize:   [50, 64], // size of the shadow
-  iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-  shadowAnchor: [4, 62],  // the same for the shadow
-  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  iconUrl: station,
+  iconSize:     [36, 49],
+  iconAnchor:   [18, 47],
+  popupAnchor:  [-3, -56] 
 });
 
 const firstStationIcon = L.icon({
-  iconUrl: LeafIcon,
-  shadowUrl: LeafShadowIcon,
-  iconSize:     [38, 95], // size of the icon
-  shadowSize:   [50, 64], // size of the shadow
-  iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-  shadowAnchor: [4, 62],  // the same for the shadow
-  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  iconUrl: origin,
+  iconSize:     [36, 49],
+  iconAnchor:   [18, 47],
+  popupAnchor:  [-3, -56] 
 });
 
 const lastStationIcon = L.icon({
-  iconUrl: LeafIcon,
-  shadowUrl: LeafShadowIcon,
-  iconSize:     [38, 95], // size of the icon
-  shadowSize:   [50, 64], // size of the shadow
-  iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-  shadowAnchor: [4, 62],  // the same for the shadow
-  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+  iconUrl: destination,
+  iconSize:     [36, 49],
+  iconAnchor:   [18, 47],
+  popupAnchor:  [-3, -56] 
 });
 
 export class Station {

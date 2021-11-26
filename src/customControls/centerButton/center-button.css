@@ -1,3 +1,9 @@
 .leaflet-control-center-button {
-    content:url("../../images/leaf-green.png");
+    content:url("../../images/center-icon.png");
+    background-color: white;
+}
+
+.leaflet-control-center-button:hover {
+    background-color: #f4f4f4;
+    cursor: pointer;
 }
