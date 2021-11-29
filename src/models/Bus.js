@@ -18,7 +18,7 @@ const BusIcon2x = L.Icon.extend({
 });
 
 const busIcon = new BusIcon({iconUrl: busIconImage});
-const busIcon2x = new BusIcon({iconUrl: busIconImage2x});
+const busIcon2x = new BusIcon2x({iconUrl: busIconImage2x});
 
 export class Bus {
   constructor(position) {
