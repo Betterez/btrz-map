@@ -10,7 +10,7 @@ const StationIcon = L.Icon.extend({
   options: {
     iconSize:     [36, 49],
     iconAnchor:   [18, 47],
-    popupAnchor:  [-3, -56]
+    popupAnchor:  [0, -45]
   }
 });
 
@@ -18,7 +18,7 @@ const StationIcon2X = L.Icon.extend({
   options: {
     iconSize:     [66, 93],
     iconAnchor:   [33, 90],
-    popupAnchor:  [-3, -56]
+    popupAnchor:  [0, -45]
   }
 });
 
@@ -66,7 +66,7 @@ export class Station {
     if (zoom < 9 && this.currentZoom >= 9) {
       this.marker.setIcon(this._getIcon("normal"));
     } else if (zoom >= 9 && this.currentZoom < 9) {
-      this.marker.setIcon(this._getIcon("2x"));
+      this.marker.setIcon(this._getIcon("normal"));
     }
 
     this.currentZoom = zoom;

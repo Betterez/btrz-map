@@ -1,23 +1,26 @@
 import L from "leaflet";
 import busIconImage from '../images/bus.png';
+import busIconShadow from '../images/animated-circle.gif';
 import busIconImage2x from '../images/bus-2x.png';
 
 const BusIcon = L.Icon.extend({
   options: {
     iconSize:     [40, 40],
     iconAnchor:   [20, 20],
-    popupAnchor:  [-3, -56]
+    popupAnchor:  [0, -45],
+    shadowSize:   [40, 40],
+    shadowAnchor: [20, 20]
   }
 });
 const BusIcon2x = L.Icon.extend({
   options: {
     iconSize:     [82, 82],
     iconAnchor:   [41, 41],
-    popupAnchor:  [-3, -56]
+    popupAnchor:  [0, -45]
   }
 });
 
-const busIcon = new BusIcon({iconUrl: busIconImage});
+const busIcon = new BusIcon({iconUrl: busIconImage, shadowUrl: busIconShadow});
 const busIcon2x = new BusIcon2x({iconUrl: busIconImage2x});
 
 export class Bus {
@@ -35,7 +38,7 @@ export class Bus {
 
   _adjustIcon(zoom) {
     if (zoom < 9 && this.currentZoom >= 9) {
-      this.marker.setIcon(this._getIcon("2x"));
+      this.marker.setIcon(this._getIcon("normal"));
     } else if (zoom >= 9 && this.currentZoom < 9) {
       this.marker.setIcon(this._getIcon("normal"));
     }
