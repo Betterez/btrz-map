@@ -5,7 +5,7 @@ import {StationsService} from "./services/StationsService";
 import {TripsService} from "./services/TripsService";
 import {GPSService} from "./services/GPSService";
 import {registerCustomControls} from "./customControls";
-import "./override-css.css"
+import "./leaflet-styles-override.css"
 
 registerCustomControls(L);
 
