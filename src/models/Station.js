@@ -14,13 +14,21 @@ const StationIcon = L.Icon.extend({
   }
 });
 
+const StationIcon2X = L.Icon.extend({
+  options: {
+    iconSize:     [36, 49], // TODO: change this size so they look actually bigger
+    iconAnchor:   [18, 47],
+    popupAnchor:  [-3, -56]
+  }
+});
+
 const stationIcon = new StationIcon({iconUrl: station});
 const firstStationIcon = new StationIcon({iconUrl: origin});
 const lastStationIcon = new StationIcon({iconUrl: destination});
 
-const stationIcon2x = new StationIcon({iconUrl: station2x});
-const firstStationIcon2x = new StationIcon({iconUrl: origin2x});
-const lastStationIcon2x = new StationIcon({iconUrl: destination2x});
+const stationIcon2x = new StationIcon2X({iconUrl: station2x});
+const firstStationIcon2x = new StationIcon2X({iconUrl: origin2x});
+const lastStationIcon2x = new StationIcon2X({iconUrl: destination2x});
 
 
 export class Station {
