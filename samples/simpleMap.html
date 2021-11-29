@@ -22,16 +22,11 @@
   const tilesLayerOptions = {
     attribution: "&copy; <a href=\"https://carto.com\">carto.com</a> contributors"
   };
-  const map = btrzMap.map({
-    containerId: "map",
-    tilesProviderUrl,
-    tilesLayerOptions
-  });
+  const lib = btrzMap.init({env: businessData.env, apiKey: businessData.apiKey});
+  const map = lib.map({containerId: "map", tilesProviderUrl, tilesLayerOptions});
 
   let trip = null;
-  btrzMap.trip({
-    env: businessData.env,
-    apiKey: businessData.apiKey,
+  lib.trip({
     routeId: businessData.routeId,
     scheduleId: businessData.scheduleId,
     date: businessData.date,

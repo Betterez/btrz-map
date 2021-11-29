@@ -1,7 +1,6 @@
-import L from "leaflet";
 import CenterButtonDef from "./centerButton/CenterButton";
 
-export function registerCustomControls() {
+export function registerCustomControls(L) {
   if (!L.Control.CenterButton) {
     L.Control.CenterButton = L.Control.extend(CenterButtonDef);
 
