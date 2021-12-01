@@ -5,6 +5,7 @@ import station from '../images/station.png';
 import station2x from '../images/station-2x.png';
 import destination from '../images/destination.png';
 import destination2x from '../images/destination-2x.png';
+import {getUserLang, timeWithZero} from "../utils/utils"
 
 const StationIcon = L.Icon.extend({
   options: {
@@ -34,6 +35,7 @@ const lastStationIcon2x = new StationIcon2X({iconUrl: destination2x});
 export class Station {
   constructor(stationData) {
     console.log("Station constructor: ", stationData)
+    console.log("userLang: ", getUserLang());
     this.id = stationData._id;
     this.name = stationData.name;
     this.departureTimestamp = stationData.departureTimestamp;
@@ -48,9 +50,15 @@ export class Station {
     this.marker = L.marker([stationData.latitude, stationData.longitude], {icon: initialIcon});
 
     if (this.positionInTrip === 0) {
-      this.marker.bindPopup(`<b>${this.name}</b><br>ETD ${this.departureTimestamp}`);
+      const ETD = new Date(this.departureTimestamp);
+      const hours = ETD.getHours();
+      const minutes = timeWithZero(ETD.getMinutes());
+      this.marker.bindPopup(`<b>${this.name}</b><br>ETD ${hours}:${minutes} hs.`);
     } else {
-      this.marker.bindPopup(`<b>${this.name}</b><br>ETA ${this.arrivalTimestamp}`);
+      const ETA = new Date(this.arrivalTimestamp);
+      const hours = ETA.getHours();
+      const minutes = timeWithZero(ETA.getMinutes());
+      this.marker.bindPopup(`<b>${this.name}</b><br>ETA ${hours}:${minutes} hs.`);
     }
   }
 

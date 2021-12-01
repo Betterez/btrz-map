@@ -15,6 +15,7 @@
 <body>
     <h1>Where is my bus?</h1>
     <div id="map"></div>
+    <h4 id="timezoneNote"></h4>
 </body>
 <script type='text/javascript' src="businessData.js"></script>
 <script>
@@ -35,5 +36,9 @@
     trip = _trip;
     trip.addTo(map);
   });
+
+  //All times are showed in local timezone, it is better to make it clear somewhere in the page
+  const timezoneDiv = document.getElementById("timezoneNote");
+  timezoneDiv.innerHTML = "All times are in  " + Intl.DateTimeFormat().resolvedOptions().timeZone + " time";
 </script>
 </html>
