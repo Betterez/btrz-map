@@ -32,30 +32,32 @@ const lastStationIcon2x = new StationIcon2X({iconUrl: destination2x});
 
 
 export class Station {
-  constructor(stationData, indexInTrip, isLastStation) {
-    console.log("Station constructor")
+  constructor(stationData) {
+    console.log("Station constructor: ", stationData)
     this.id = stationData._id;
     this.name = stationData.name;
+    this.departureTimestamp = stationData.departureTimestamp;
+    this.arrivalTimestamp = stationData.arrivalTimestamp;
     this.latitude = stationData.latitude;
     this.longitude = stationData.longitude;
     this.currentZoom = 0;
-    this.isLastStation = isLastStation;
-    this.indexInTrip = indexInTrip;
+    this.isLastStation = stationData.isLastStation;
+    this.positionInTrip = stationData.positionInTrip;
 
     const initialIcon = this._getIcon("normal");
     this.marker = L.marker([stationData.latitude, stationData.longitude], {icon: initialIcon});
 
-    if (indexInTrip === 0) {
-      this.marker.bindPopup(`<b>${this.name}</b><br>ETD ${this.departure}`);
+    if (this.positionInTrip === 0) {
+      this.marker.bindPopup(`<b>${this.name}</b><br>ETD ${this.departureTimestamp}`);
     } else {
-      this.marker.bindPopup(`<b>${this.name}</b><br>ETA ${this.arrival}`);
+      this.marker.bindPopup(`<b>${this.name}</b><br>ETA ${this.arrivalTimestamp}`);
     }
   }
 
   _getIcon(size) {
     if (this.isLastStation) {
       return size === "normal" ? lastStationIcon : lastStationIcon2x;
-    } else if (this.indexInTrip === 0) {
+    } else if (this.positionInTrip === 0) {
       return size === "normal" ? firstStationIcon : firstStationIcon2x;
     } else {
       return size === "normal" ? stationIcon : stationIcon2x;

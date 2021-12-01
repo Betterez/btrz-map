@@ -2,12 +2,11 @@ import {TravelledPath} from "./TravelledPath";
 import {Bus} from "./Bus";
 
 export class Trip {
-  constructor({tripFromBackend, stationsMap, gpsService}) {
+  constructor({tripFromBackend, stations, gpsService}) {
     this.routeId = tripFromBackend.routeId;
     this.scheduleId = tripFromBackend.scheduleName;
     this.date = tripFromBackend.date;
-    this.legs = tripFromBackend.legs;
-    this.stationsMap = stationsMap;
+    this.stations = stations;
     this.travelledPath = null;
     this.gpsIntervalId = null;
     this.gpsService = gpsService;
@@ -17,19 +16,15 @@ export class Trip {
   }
 
   _addStationsTo(map) {
-    const keys = Object.keys(this.stationsMap);
-    for (let i = 0; i < keys.length; i++) {
-      const station = this.stationsMap[keys[i]];
+    this.stations.forEach((station) => {
       station.addTo(map);
-    }
+    });
   }
 
   _removeStationsFrom(map) {
-    const keys = Object.keys(this.stationsMap);
-    for (let i = 0; i < keys.length; i++) {
-      const station = this.stationsMap[keys[i]];
+    this.stations.forEach((station) => {
       station.removeFrom(map);
-    }
+    });
   }
 
   _addTravelledPathTo(map, coordinates) {
@@ -57,8 +52,7 @@ export class Trip {
   }
 
   _getFirstStation() {
-    const firstLeg = this.legs.find((l) => l.legord === 0);
-    return this.stationsMap[firstLeg.fromId];
+    return this.stations.find((s) => s.positionInTrip === 0);
   }
 
   _discardMovement() {
