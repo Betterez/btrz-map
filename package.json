@@ -4,8 +4,12 @@
   "description": "",
   "main": "dist/btrz-map.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "build": "webpack",
+    "commit-build": "git add dist/ && (git diff-index --quiet HEAD || git commit -m \"built src\")",
+    "preversion": "npm test && npm run build && npm run commit-build",
+    "postversion": "git push origin master && git push --tags",
+    "version": "git tag $1"
   },
   "repository": {
     "type": "git",
