@@ -22,6 +22,9 @@
   },
   "homepage": "https://github.com/Betterez/btrz-map#readme",
   "devDependencies": {
+    "@babel/core": "7.16.0",
+    "@babel/preset-env": "7.16.4",
+    "babel-loader": "8.2.3",
     "css-loader": "6.5.1",
     "eslint": "8.2.0",
     "eslint-config-btrz-base": "1.0.0",
