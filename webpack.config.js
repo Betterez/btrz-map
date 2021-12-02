@@ -6,6 +6,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "btrz-map.js",
+    globalObject: "this",
     library: {
       name: "btrzMap",
       type: "umd"
