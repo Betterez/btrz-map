@@ -13,7 +13,8 @@ module.exports = {
       type: "umd",
       umdNamedDefine: true
     },
-    umdNamedDefine: true
+    umdNamedDefine: true,
+    publicPath: ''
   },
   externals: {
     leaflet: {
