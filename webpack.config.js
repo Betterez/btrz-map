@@ -1,3 +1,4 @@
+const CircularDependencyPlugin = require('circular-dependency-plugin')
 const path = require("path");
 
 module.exports = {
@@ -9,8 +10,10 @@ module.exports = {
     globalObject: "this",
     library: {
       name: "btrzMap",
-      type: "umd"
-    }
+      type: "umd",
+      umdNamedDefine: true
+    },
+    umdNamedDefine: true
   },
   externals: {
     leaflet: {
@@ -42,4 +45,19 @@ module.exports = {
       }
     ],
   },
+  plugins: [
+    new CircularDependencyPlugin({
+      // exclude detection of files based on a RegExp
+      exclude: /a\.js|node_modules/,
+      // include specific files based on a RegExp
+      include: /\.m?js$/,
+      // add errors to webpack instead of warnings
+      failOnError: true,
+      // allow import cycles that include an asyncronous import,
+      // e.g. via import(/* webpackMode: "weak" */ './file.js')
+      allowAsyncCycles: false,
+      // set the current working directory for displaying module paths
+      cwd: process.cwd(),
+    })
+  ]
 };
