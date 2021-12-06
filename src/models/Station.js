@@ -1,17 +1,17 @@
 import L from "leaflet";
-import origin from '../images/origin.png';
+import origin from '../images/circle-origin.png';
 import origin2x from '../images/origin-2x.png';
-import station from '../images/station.png';
+import station from '../images/circle-station.png';
 import station2x from '../images/station-2x.png';
-import destination from '../images/destination.png';
+import destination from '../images/circle-destination.png';
 import destination2x from '../images/destination-2x.png';
 import {getUserLang, timeWithZero} from "../utils/utils"
 
 const StationIcon = L.Icon.extend({
   options: {
-    iconSize:     [36, 49],
-    iconAnchor:   [18, 47],
-    popupAnchor:  [0, -45]
+    iconSize:     [20, 20],
+    iconAnchor:   [10, 10],
+    popupAnchor:  [0, -25]
   }
 });
 
@@ -19,7 +19,7 @@ const StationIcon2X = L.Icon.extend({
   options: {
     iconSize:     [66, 93],
     iconAnchor:   [33, 90],
-    popupAnchor:  [0, -45]
+    popupAnchor:  [0, -35]
   }
 });
 
