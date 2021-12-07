@@ -14,7 +14,6 @@ module.exports = {
       umdNamedDefine: true
     },
     umdNamedDefine: true,
-    publicPath: ''
   },
   externals: {
     leaflet: {
