@@ -28,6 +28,7 @@ export class Trip {
   }
 
   _addTravelledPathTo(map, coordinates) {
+    console.log("Adding path");
     this._removeTravelledPathFrom(map);
     this.travelledPath = new TravelledPath(coordinates);
     this.travelledPath.addTo(map);
@@ -40,6 +41,7 @@ export class Trip {
   }
 
   _addBusTo(map, position) {
+    console.log("adding bus")
     this._removeBusFrom(map);
     this.bus = new Bus(position);
     this.bus.addTo(map);
@@ -63,14 +65,17 @@ export class Trip {
   centerMap() {
     this._discardMovement();
     if (this.currentPosition && this.currentPosition.lastKnown) {
+      console.log("centering map on current position")
       map.setView([this.currentPosition.lastKnown.latitude, this.currentPosition.lastKnown.longitude], 14);
     } else {
+      console.log("centering map on first station")
       const firstStation = this._getFirstStation();
       map.setView([firstStation.latitude, firstStation.longitude], 14);
     }
   }
 
   _updatePosition(map) {
+    console.log("updating position");
     return this.gpsService.getScannerAppLocation({
       routeId: this.routeId,
       scheduleId: this.scheduleId,
@@ -79,6 +84,7 @@ export class Trip {
     })
     .then((position) => {
       this.currentPosition = position;
+      console.log("currentPosition: ", this.currentPosition);
 
       if (position.travelledPath) {
         this._addTravelledPathTo(map, position.travelledPath);
@@ -95,6 +101,7 @@ export class Trip {
   }
 
   _startLiveTracking(map) {
+    console.log("starting live tracking")
     if (this.gpsIntervalId) {
       this._stopLiveTracking();
     }
@@ -118,6 +125,7 @@ export class Trip {
   }
 
   _addCenterButton(map) {
+    console.log("adding center control");
     this._removeCenterButton(map);
 
     this.centerControl = L.control.centerButton({
@@ -132,6 +140,7 @@ export class Trip {
   }
 
   addTo(map) {
+    console.log("adding trip to map")
     this._addCenterButton(map);
     this._addStationsTo(map);
     return this._startLiveTracking(map)
@@ -142,6 +151,9 @@ export class Trip {
             this.autoCenterEnabled = false;
           }
         });
+      })
+      .catch((error) => {
+        console.log("There was a problem adding trip to map: ", error);
       });
   }
 

@@ -2,6 +2,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin')
 const path = require("path");
 
 module.exports = {
+  mode: "development",
   entry: "./src/index.js",
   target: ['web', 'es5'],
   output: {

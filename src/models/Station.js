@@ -83,6 +83,7 @@ export class Station {
   }
 
   addTo(map) {
+    console.log(`adding station ${this.name} to map`);
     map.on('zoomend', () => {
       const newZoom = map.getZoom();
       this._adjustIcon(newZoom);
@@ -90,6 +91,7 @@ export class Station {
     });
 
     this.marker.addTo(map);
+    console.log("station added")
   }
 
   removeFrom(map) {
