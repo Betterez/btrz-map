@@ -1,4 +1,4 @@
-export function getUserLang() {
+export function getUserLang(navigator) {
   if (!navigator) {
     return null;
   }
@@ -15,3 +15,10 @@ export function timeWithZero(time) {
 
   return "" + time;
 };
+
+const Utils = {
+  getUserLang,
+  timeWithZero
+};
+
+export default Utils;
