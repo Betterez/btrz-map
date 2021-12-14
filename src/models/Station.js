@@ -12,11 +12,11 @@ if (typeof process != "undefined" && process.env.IGNORE_IMAGES) {
 } else {
   console.log("using real images")
   const origin = require('../images/circle-origin.png');
-  const origin2x = require('../images/origin-2x.png');
+  const origin2x = require('../images/circle-origin.png'); //TODO: missing 2x image
   const station = require('../images/circle-station.png');
-  const station2x = require('../images/station-2x.png');
+  const station2x = require('../images/circle-station.png'); //TODO: missing 2x image
   const destination = require('../images/circle-destination.png');
-  const destination2x = require('../images/destination-2x.png');
+  const destination2x = require('../images/circle-destination.png'); //TODO: missing 2x image
 
   const StationIcon = L.Icon.extend({
     options: {
