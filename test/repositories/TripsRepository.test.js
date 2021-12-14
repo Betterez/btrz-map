@@ -3,7 +3,7 @@ const chance = new Chance();
 const chai = require("chai");
 const expect = chai.expect;
 
-const {TripsRepository, Station, GPSService} = require("../dist-test/btrz-map-test").testAPI;
+const {TripsRepository, Station, GPSService} = require("../../dist-test/btrz-map-test").testAPI;
 
 describe("TripsRepository", function() {
   describe("#findAsync()", function() {
