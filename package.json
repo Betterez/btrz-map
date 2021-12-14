@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/btrz-map.js",
   "scripts": {
-    "test": "IGNORE_IMAGES=true npm run build-tests && mocha -r jsdom-global/register",
+    "test": "IGNORE_IMAGES=true npm run build-tests && mocha 'test/**/*.js' -r jsdom-global/register",
     "build-tests": "webpack --config test/webpack-tests.config.js",
     "build": "webpack",
     "commit-build": "git add dist/ && (git diff-index --quiet HEAD || git commit -m \"built src\")",

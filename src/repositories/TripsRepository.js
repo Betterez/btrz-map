@@ -1,5 +1,4 @@
 import {Trip} from "../models/Trip";
-import {GPSService} from "../services/GPSService";
 
 export class TripsRepository {
   constructor({stationsRepository, tripsService, gpsService}) {
@@ -23,7 +22,6 @@ export class TripsRepository {
       return this.stationsRepository.findAsync(_tripFromBackend.legs);
     })
     .then((stations) => {
-
       return new Trip({
         tripFromBackend: _tripFromBackend,
         stations,

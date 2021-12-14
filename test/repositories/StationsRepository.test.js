@@ -3,7 +3,7 @@ const chance = new Chance();
 const chai = require("chai");
 const expect = chai.expect;
 
-const {StationsRepository} = require("./dist-test/btrz-map-test").testAPI;
+const {StationsRepository} = require("../dist-test/btrz-map-test").testAPI;
 
 describe("StationsRepository", function() {
   describe("#findAsync()", function() {
@@ -27,11 +27,10 @@ describe("StationsRepository", function() {
     ];
 
 
-    it("should return the list of station in order", function() {
+    it("should return the stations list in order", function() {
       const repository = new StationsRepository({stationsService: stationsServiceMock})
       return repository.findAsync(legs)
         .then((stations) => {
-          console.log("stations: ", stations)
           expect(stations.length).to.equal(4);
 
           expect(stations[0].id).to.equal("1111");
