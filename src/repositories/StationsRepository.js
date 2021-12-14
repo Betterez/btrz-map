@@ -5,20 +5,6 @@ export class StationsRepository {
     this.stationService = stationsService;
   }
 
-  /**
-   * Make sure the ids are sorted by position for a particular trip
-   */
-  findAsyncOld(ids) {
-    return this.stationService.getStationsFromIds(ids)
-      .then((stationsFromBackend) => {
-        return stationsFromBackend.map((s) => {
-          const indexInTrip = ids.findIndex((id) => id === s._id);
-          const isLastStation = indexInTrip === ids.length - 1;
-          return new Station(s, indexInTrip, isLastStation);
-        });
-      })
-  }
-
   findAsync(legs) {
     const stationsMap = {};
     const sortedLegs = legs.slice().sort((l1, l2) => l1.legord < l2.legord ? -1 : 1);

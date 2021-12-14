@@ -1,27 +1,35 @@
 import L from "leaflet";
-import busIconImage from '../images/bus.png';
-import busIconShadow from '../images/animated-circle.gif';
-import busIconImage2x from '../images/bus-2x.png';
+let busIcon = null;
+let busIcon2x = null;
 
-const BusIcon = L.Icon.extend({
-  options: {
-    iconSize:     [40, 40],
-    iconAnchor:   [20, 20],
-    popupAnchor:  [0, -45],
-    shadowSize:   [40, 40],
-    shadowAnchor: [20, 20]
-  }
-});
-const BusIcon2x = L.Icon.extend({
-  options: {
-    iconSize:     [82, 82],
-    iconAnchor:   [41, 41],
-    popupAnchor:  [0, -45]
-  }
-});
+if (typeof process != "undefined" && process.env.IGNORE_IMAGES) {
+  console.log("using fake images")
+} else {
+  console.log("using real images")
+  const busIconImage = require('../images/bus.png');
+  const busIconShadow = require('../images/animated-circle.gif');
+  const busIconImage2x = require('../images/bus-2x.png');
 
-const busIcon = new BusIcon({iconUrl: busIconImage, shadowUrl: busIconShadow});
-const busIcon2x = new BusIcon2x({iconUrl: busIconImage2x});
+  const BusIcon = L.Icon.extend({
+    options: {
+      iconSize:     [40, 40],
+      iconAnchor:   [20, 20],
+      popupAnchor:  [0, -45],
+      shadowSize:   [40, 40],
+      shadowAnchor: [20, 20]
+    }
+  });
+  const BusIcon2x = L.Icon.extend({
+    options: {
+      iconSize:     [82, 82],
+      iconAnchor:   [41, 41],
+      popupAnchor:  [0, -45]
+    }
+  });
+
+  busIcon = new BusIcon({iconUrl: busIconImage, shadowUrl: busIconShadow});
+  busIcon2x = new BusIcon2x({iconUrl: busIconImage2x});
+}
 
 export class Bus {
   constructor(position) {

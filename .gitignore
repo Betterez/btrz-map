@@ -107,3 +107,4 @@ package-lock.json
 .idea
 
 samples/businessData.js
+test/dist-test
