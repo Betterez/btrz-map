@@ -118,15 +118,15 @@ export class Trip {
     this.gpsIntervalId = null;
   }
 
-  _removeCenterButton(map) {
+  _removeCenterButton() {
     if (this.centerControl) {
-      this.centerControl.removeFrom(map);
+      this.centerControl.remove();
     }
   }
 
   _addCenterButton(map) {
     console.log("adding center control");
-    this._removeCenterButton(map);
+    this._removeCenterButton();
 
     this.centerControl = L.control.centerButton({
       position: "topleft"
@@ -158,6 +158,7 @@ export class Trip {
   }
 
   removeFrom(map) {
+    this._removeCenterButton();
     this._removeStationsFrom(map);
     this._removeTravelledPathFrom(map);
     this._removeBusFrom(map);
