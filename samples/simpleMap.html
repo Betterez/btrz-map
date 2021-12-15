@@ -20,11 +20,10 @@
 <script type='text/javascript' src="businessData.js"></script>
 <script>
   const tilesProviderUrl = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}.png";
-  const tilesLayerOptions = {
-    attribution: "&copy; <a href=\"https://carto.com\">carto.com</a> contributors"
-  };
+  const attribution = "&copy; <a href=\"https://carto.com\">carto.com</a> contributors";
+
   const lib = btrzMap.init({env: businessData.env, apiKey: businessData.apiKey});
-  const map = lib.map({containerId: "map", tilesProviderUrl, tilesLayerOptions});
+  const map = lib.map({containerId: "map", tilesProviderUrl, attribution});
 
   let trip = null;
 
@@ -39,12 +38,9 @@
   })
 
   // ..after you are done with the map
-  setTimeout(() => {
-    map.removeTrip(trip);
-  }, 8000)
+  // map.removeTrip(trip);
 
-  //All times are showed in local timezone, it is better to make it clear somewhere in the page/
-  // Optional
+  // Optional: All times are showed in local timezone, it is better to make it clear somewhere in the page/
   const timezoneDiv = document.getElementById("timezoneNote");
   timezoneDiv.innerHTML = "All times are in  " + Intl.DateTimeFormat().resolvedOptions().timeZone + " time";
 </script>
