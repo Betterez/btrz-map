@@ -74,7 +74,7 @@ export class Trip {
     }
   }
 
-  _updatePosition(map) {
+  _updateBusPosition(map) {
     console.log("updating position");
     return this.gpsService.getScannerAppLocation({
       routeId: this.routeId,
@@ -107,10 +107,10 @@ export class Trip {
     }
 
     this.gpsIntervalId = setInterval(() => {
-      this._updatePosition(map, false);
+      this._updateBusPosition(map, false);
     }, 10000);
 
-    return this._updatePosition(map, true);
+    return this._updateBusPosition(map, true);
   }
 
   _stopLiveTracking() {
@@ -158,6 +158,7 @@ export class Trip {
   }
 
   removeFrom(map) {
+    this._stopLiveTracking();
     this._removeCenterButton();
     this._removeStationsFrom(map);
     this._removeTravelledPathFrom(map);
