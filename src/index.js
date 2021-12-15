@@ -4,6 +4,7 @@ import {StationsRepository} from "./repositories/StationsRepository";
 import {StationsService} from "./services/StationsService";
 import {TripsService} from "./services/TripsService";
 import {GPSService} from "./services/GPSService";
+import {Map} from "./models/Map";
 import {registerCustomControls} from "./customControls";
 import "./leaflet-styles-override.css"
 
@@ -22,26 +23,13 @@ export function init({env, apiKey}) {
       return;
     }
 
-    const map = L.map(containerId);
-    L.tileLayer(tilesProviderUrl, tilesLayerOptions).addTo(map);
+    const leafletMap = L.map(containerId);
+    L.tileLayer(tilesProviderUrl, tilesLayerOptions).addTo(leafletMap);
+    const map = new Map({leafletMap, tripsRepository});
     console.log("btrz-map ready");
     return map;
   }
-
-  function trip({routeId, scheduleId, date, productId}) {
-    return tripsRepository.findAsync({
-      routeId,
-      productId,
-      scheduleId,
-      date,
-    })
-      .catch((err) => {
-        console.log("There was a problem getting the trip: ", err);
-      });
-  }
-
   return {
-    map,
-    trip
+    map
   }
 }

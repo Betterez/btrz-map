@@ -27,17 +27,24 @@
   const map = lib.map({containerId: "map", tilesProviderUrl, tilesLayerOptions});
 
   let trip = null;
-  lib.trip({
+
+  map.addTrip({
     routeId: businessData.routeId,
     scheduleId: businessData.scheduleId,
     date: businessData.date,
     productId: businessData.productId
-  }).then((_trip) => {
+  })
+  .then((_trip) => {
     trip = _trip;
-    trip.addTo(map);
-  });
+  })
 
-  //All times are showed in local timezone, it is better to make it clear somewhere in the page
+  // ..after you are done with the map
+  setTimeout(() => {
+    map.removeTrip(trip);
+  }, 8000)
+
+  //All times are showed in local timezone, it is better to make it clear somewhere in the page/
+  // Optional
   const timezoneDiv = document.getElementById("timezoneNote");
   timezoneDiv.innerHTML = "All times are in  " + Intl.DateTimeFormat().resolvedOptions().timeZone + " time";
 </script>

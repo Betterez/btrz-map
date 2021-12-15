@@ -8,7 +8,7 @@ included in any site.
 
 ### Prerequisites
 * An account with the premium feature enabled and configured.
-* The scanner app installed on an Android phone (vx.x.x or higher) to capture the location of the bus.
+* The scanner app (vx.x.x or higher) installed on an Android phone to capture the location of the bus.
 * A Betterez public API key.
 
 #### External Dependencies

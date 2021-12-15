@@ -62,7 +62,7 @@ export class Trip {
     setTimeout(() => this.discardMovement = false, 5000);
   }
 
-  centerMap(map) {
+  _centerMap(map) {
     this._discardMovement();
     if (this.currentPosition && this.currentPosition.lastKnown) {
       console.log("centering map on current position")
@@ -95,7 +95,7 @@ export class Trip {
       }
 
       if (this.autoCenterEnabled) {
-        this.centerMap(map);
+        this._centerMap(map);
       }
     });
   }
@@ -135,7 +135,7 @@ export class Trip {
     this.centerControl.getContainer().onclick = () => {
       console.log("user pressed center button");
       this.autoCenterEnabled = true;
-      this.centerMap(map);
+      this._centerMap(map);
     };
   }
 
