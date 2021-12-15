@@ -8,9 +8,11 @@
     "build-tests": "webpack --config webpack-tests.config.js",
     "build": "webpack",
     "commit-build": "git add dist/ && (git diff-index --quiet HEAD || git commit -m \"built src\")",
-    "preversion": "npm test && npm run build && npm run commit-build",
+    "commit-docs": "git add docs/ && (git diff-index --quiet HEAD || git commit -m \"built docs\")",
+    "preversion": "npm test && npm run build && npm run commit-build && npm run generate-docs && npm run commit-docs",
     "postversion": "git push origin main && git push --tags",
-    "version": "git tag $1"
+    "version": "git tag $1",
+    "generate-docs": "rm docs/API.md && node_modules/.bin/jsdoc2md --no-cache src/index.js src/models/Map.js >> docs/API.md"
   },
   "repository": {
     "type": "git",
@@ -32,6 +34,7 @@
     "css-loader": "6.5.1",
     "eslint": "8.2.0",
     "eslint-config-btrz-base": "1.0.0",
+    "jsdoc-to-markdown": "7.1.0",
     "jsdom": "19.0.0",
     "jsdom-global": "3.0.2",
     "leaflet": "1.7.1",

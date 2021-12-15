@@ -10,7 +10,7 @@ included in any site.
 * An account with the premium feature enabled and configured.
 * The scanner app (vx.x.x or higher) installed on an Android phone to capture the location of the bus.
 * A Betterez public API key.
-* You will need to select a map tiles provider, that is a provider for the map imagery.
+* You will need to select a map tiles provider, that is, a provider for the map imagery.
 
 #### External Dependencies
 This lib is built on top of [leaftlet](https://leafletjs.com/) so you will need  to install 
@@ -48,6 +48,15 @@ TODO: publish
 ### Usage
 ``` html
 ...
+<head>
+    ...
+    //Make sure to provide at least a height for the map container
+    <style>
+        #map {
+            height: 400px;
+        }
+    </style>
+</head>
 <body>
     ...
     <div id="map"></div>
@@ -87,3 +96,16 @@ TODO: publish
   timezoneDiv.innerHTML = "All times are in  " + Intl.DateTimeFormat().resolvedOptions().timeZone + " time";
 </script>
 ```
+### API
+Please check the [API docs](docs/API.md)
+
+### Contributing as a developer
+
+#### Run test
+```npm test```
+
+#### Build
+```npm run build```
+
+#### Push a new version
+```npm version [major || minor || patch]```
