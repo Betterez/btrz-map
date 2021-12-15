@@ -1,6 +1,6 @@
 {
   "name": "btrz-map",
-  "version": "0.0.12",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/btrz-map.js",
   "scripts": {
