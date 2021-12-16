@@ -38,10 +38,10 @@ After you are done with this trip, please call [removeTrip](removeTrip) to free 
 | Param | Type | Description |
 | --- | --- | --- |
 | tripOptions | <code>Object</code> | The params needed to identify a trip. |
-| btrzMapOptions.routeId | <code>string</code> | Id of the route for the trip you want to show. |
-| btrzMapOptions.scheduleId | <code>string</code> | Id of the schedule for the trip you want to show. |
-| btrzMapOptions.date | <code>string</code> | Date of departure for the trip in format "YYYY-MM-DD". |
-| btrzMapOptions.productId | <code>string</code> | Product id enabled for that trip". |
+| tripOptions.routeId | <code>string</code> | Id of the route for the trip you want to show. |
+| tripOptions.scheduleId | <code>string</code> | Id of the schedule for the trip you want to show. |
+| tripOptions.date | <code>string</code> | Date of departure for the trip in format "YYYY-MM-DD". |
+| tripOptions.productId | <code>string</code> | Product id enabled for that trip". |
 
 <a name="Map+removeTrip"></a>
 
