@@ -70,19 +70,18 @@ TODO: publish
   // Check the provider site for more info.
   // In this example we are using Carto as a map tiles provider.
   const tilesProviderUrl = "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}.png";
-  const tilesLayerOptions = {
-    attribution: "&copy; <a href=\"https://carto.com\">carto.com</a> contributors"
-  };
+  const attribution = "&copy; <a href=\"https://carto.com\">carto.com</a> contributors";
+
   const lib = btrzMap.init({env: "sandbox", apiKey: "yourBetterezPublicKey"});
-  const map = lib.map({containerId: "map", tilesProviderUrl, tilesLayerOptions});
+  const map = lib.map({containerId: "map", tilesProviderUrl, attribution});
 
   let trip = null;
 
   map.addTrip({
-    routeId: businessData.routeId,
-    scheduleId: businessData.scheduleId,
-    date: businessData.date,
-    productId: businessData.productId
+    routeId: "yourRouteId",
+    scheduleId: "yourScheduleId",
+    date: "YYYY-MM-DD",
+    productId: "yourProductId"
   })
   .then((_trip) => {
     trip = _trip;
