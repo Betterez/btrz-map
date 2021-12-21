@@ -8,7 +8,7 @@ included in any site.
 
 ### Prerequisites
 * An account with the premium feature enabled and configured.
-* The scanner app (vx.x.x or higher) installed on an Android phone to capture the location of the bus.
+* The scanner app (v7.13.0 or higher) installed on an Android phone to capture the location of the bus.
 * A Betterez public API key.
 * You will need to select a map tiles provider, that is, a provider for the map imagery.
 
@@ -17,8 +17,12 @@ This lib is built on top of [leaftlet](https://leafletjs.com/) so you will need 
 leaflet 1.7.1 or compatible.
 
 ### Installation
-#### Directly from your page
-* Include Leaflet CSS file in the head section of your document:
+#### Install btrz-map
+``` npm i git@github.com:Betterez/btrz-map.git```
+
+#### Install leaflet
+
+* Now Include Leaflet CSS file in the head section of your document:
 
 ```
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -35,15 +39,15 @@ leaflet 1.7.1 or compatible.
    crossorigin=""></script>
 ```
 
+Note: Alternatively you can install leaflet via npm too: 
+``` npm i leaflet@1.7.1``` 
+
 * Include btrz-map:
 ```
 <!-- Make sure you put this AFTER Leaflet's JS -->
- TODO
+<!-- When installed via npm, the location of the file will be node_modules/btrz-map/dist -->
+ <script type='text/javascript' src="btrz-map.js"></script>
 ```
-#### Or via npm
-TODO: publish
-
-``` npm i leaflet@1.7.1 btrz-map```
 
 ### Usage
 ``` html
