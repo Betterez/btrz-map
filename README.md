@@ -18,7 +18,7 @@ leaflet 1.7.1 or compatible.
 
 ### Installation
 #### Install btrz-map
-``` npm i git@github.com:Betterez/btrz-map.git```
+``` npm i btrz-map```
 
 #### Install leaflet
 

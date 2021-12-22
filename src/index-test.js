@@ -7,8 +7,8 @@ import {Station} from "../src/models/Station";
 import {Trip} from "../src/models/Trip";
 import Utils from "../src/utils/utils";
 
-/* This API is exposed to the testing framework so we can access Services, Models, etc so we can do regression testing.
-   Users of this library has access to a much restricted API in index.js
+/* This API is exposed to the testing framework so we can access Services, Models, etc and do regression testing.
+   Users of this library has access to a much more restricted API in index.js
  */
 export const testAPI = {
   TripsService,
