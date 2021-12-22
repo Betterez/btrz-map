@@ -17,12 +17,13 @@ This lib is built on top of [leaftlet](https://leafletjs.com/) so you will need 
 leaflet 1.7.1 or compatible.
 
 ### Installation
-#### Install btrz-map
-``` npm i btrz-map```
+Two options:
+* Include the scripts in you HTML file, or
+* via npm install (if using NodeJS)
 
-#### Install leaflet
+#### Include the scripts in your HTML file
 
-* Now Include Leaflet CSS file in the head section of your document:
+* Include Leaflet CSS file in the head section of your document:
 
 ```
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -39,15 +40,20 @@ leaflet 1.7.1 or compatible.
    crossorigin=""></script>
 ```
 
-Note: Alternatively you can install leaflet via npm too: 
-``` npm i leaflet@1.7.1``` 
-
 * Include btrz-map:
 ```
 <!-- Make sure you put this AFTER Leaflet's JS -->
-<!-- When installed via npm, the location of the file will be node_modules/btrz-map/dist -->
- <script type='text/javascript' src="btrz-map.js"></script>
+ <script type='text/javascript' src="https://unpkg.com/btrz-map@0.1.1/dist/btrz-map.js"></script>
 ```
+
+#### Via npm install
+``` npm i btrz-map leaflet@1.7.1```
+
+With this method you will need to configure your server to find the proper files for each lib.
+
+For ```btrz-lib```, all the files you need are located under ```node_modules/btrz-map/dist```
+
+For ```leaflet```, all the files you need are located under ```node_modules/leaflet/dist```
 
 ### Usage
 ``` html
