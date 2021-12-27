@@ -2,7 +2,7 @@ import {TravelledPath} from "./TravelledPath";
 import {Bus} from "./Bus";
 
 export class Trip {
-  constructor({tripFromBackend, stations, gpsService}) {
+  constructor({tripFromBackend, stations, gpsService, markerProvider}) {
     this.routeId = tripFromBackend.routeId;
     this.scheduleId = tripFromBackend.scheduleName;
     this.date = tripFromBackend.date;
@@ -12,7 +12,9 @@ export class Trip {
     this.gpsService = gpsService;
     this.centerControl = null;
     this.autoCenterEnabled =  true;
-    this.discardMovement = false
+    this.discardMovement = false;
+    this.bus = null;
+    this.markerProvider = markerProvider;
   }
 
   _addStationsTo(map) {
@@ -30,7 +32,7 @@ export class Trip {
   _addTravelledPathTo(map, coordinates) {
     console.log("Adding path");
     this._removeTravelledPathFrom(map);
-    this.travelledPath = new TravelledPath(coordinates);
+    this.travelledPath = new TravelledPath(coordinates, this.markerProvider);
     this.travelledPath.addTo(map);
   }
 
@@ -43,7 +45,7 @@ export class Trip {
   _addBusTo(map, position) {
     console.log("adding bus")
     this._removeBusFrom(map);
-    this.bus = new Bus(position);
+    this.bus = new Bus(position, this.markerProvider);
     this.bus.addTo(map);
   }
 

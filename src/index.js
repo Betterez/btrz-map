@@ -4,6 +4,7 @@ import {StationsRepository} from "./repositories/StationsRepository";
 import {StationsService} from "./services/StationsService";
 import {TripsService} from "./services/TripsService";
 import {GPSService} from "./services/GPSService";
+import {MarkerProvider} from "../src/markers/MarkerProvider";
 import {Map} from "./models/Map";
 import {registerCustomControls} from "./customControls";
 import "./leaflet-styles-override.css"
@@ -18,11 +19,12 @@ registerCustomControls(L);
  * @returns {Object} Initialized instance of the btrz-map lib
  */
 export function init({env, apiKey}) {
+  const markerProvider = new MarkerProvider();
   const stationsService = new StationsService({apiKey, env});
   const tripsService = new TripsService({apiKey, env});
-  const stationsRepository = new StationsRepository({stationsService});
+  const stationsRepository = new StationsRepository({stationsService, markerProvider});
   const gpsService = new GPSService({apiKey, env});
-  const tripsRepository = new TripsRepository({tripsService, stationsRepository, gpsService});
+  const tripsRepository = new TripsRepository({tripsService, stationsRepository, gpsService, markerProvider});
 
   /**
    * Builds and returns the map interface. This is a Betterez Map, not the leaflet map.

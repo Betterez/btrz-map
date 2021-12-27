@@ -1,8 +1,9 @@
 import {Station} from "../models/Station";
 
 export class StationsRepository {
-  constructor({stationsService}) {
+  constructor({stationsService, markerProvider}) {
     this.stationService = stationsService;
+    this.markerProvider = markerProvider;
   }
 
   findAsync(legs) {
@@ -48,7 +49,7 @@ export class StationsRepository {
         return Object.values(stationsMap);
       })
       .then((stations) => {
-        return stations.map((station => new Station(station)));
+        return stations.map((station => new Station(station, this.markerProvider)));
       })
   }
 }
