@@ -6,6 +6,7 @@ import {TripsService} from "./services/TripsService";
 import {GPSService} from "./services/GPSService";
 import {MarkerProvider} from "../src/markers/MarkerProvider";
 import {Map} from "./models/Map";
+import {Bus} from "./models/Bus";
 import {registerCustomControls} from "./customControls";
 import "./leaflet-styles-override.css"
 
@@ -20,11 +21,18 @@ registerCustomControls(L);
  */
 export function init({env, apiKey}) {
   const markerProvider = new MarkerProvider();
+  const bus = new Bus(markerProvider);
   const stationsService = new StationsService({apiKey, env});
   const tripsService = new TripsService({apiKey, env});
   const stationsRepository = new StationsRepository({stationsService, markerProvider});
   const gpsService = new GPSService({apiKey, env});
-  const tripsRepository = new TripsRepository({tripsService, stationsRepository, gpsService, markerProvider});
+  const tripsRepository = new TripsRepository({
+    tripsService,
+    stationsRepository,
+    gpsService,
+    markerProvider,
+    bus
+  });
 
   /**
    * Builds and returns the map interface. This is a Betterez Map, not the leaflet map.

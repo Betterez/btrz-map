@@ -1,8 +1,7 @@
 import {TravelledPath} from "./TravelledPath";
-import {Bus} from "./Bus";
 
 export class Trip {
-  constructor({tripFromBackend, stations, gpsService, markerProvider}) {
+  constructor({tripFromBackend, stations, bus, gpsService, markerProvider}) {
     this.routeId = tripFromBackend.routeId;
     this.scheduleId = tripFromBackend.scheduleName;
     this.date = tripFromBackend.date;
@@ -13,7 +12,7 @@ export class Trip {
     this.centerControl = null;
     this.autoCenterEnabled =  true;
     this.discardMovement = false;
-    this.bus = null;
+    this.bus = bus;
     this.markerProvider = markerProvider;
   }
 
@@ -30,7 +29,6 @@ export class Trip {
   }
 
   _addTravelledPathTo(map, coordinates) {
-    console.log("Adding path");
     this._removeTravelledPathFrom(map);
     this.travelledPath = new TravelledPath(coordinates, this.markerProvider);
     this.travelledPath.addTo(map);
@@ -42,17 +40,13 @@ export class Trip {
     }
   }
 
-  _addBusTo(map, position) {
-    console.log("adding bus")
+  _addBusTo(map) {
     this._removeBusFrom(map);
-    this.bus = new Bus(position, this.markerProvider);
     this.bus.addTo(map);
   }
 
   _removeBusFrom(map) {
-    if (this.bus) {
-      this.bus.removeFrom(map);
-    }
+    this.bus.removeFrom(map);
   }
 
   _getFirstStation() {
@@ -93,7 +87,7 @@ export class Trip {
       }
 
       if (position.lastKnown) {
-        this._addBusTo(map, position.lastKnown);
+        this.bus.addTo(map, position.lastKnown);
       }
 
       if (this.autoCenterEnabled) {
@@ -109,10 +103,10 @@ export class Trip {
     }
 
     this.gpsIntervalId = setInterval(() => {
-      this._updateBusPosition(map, false);
+      this._updateBusPosition(map);
     }, 10000);
 
-    return this._updateBusPosition(map, true);
+    return this._updateBusPosition(map);
   }
 
   _stopLiveTracking() {

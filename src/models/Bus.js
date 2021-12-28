@@ -1,16 +1,25 @@
 export class Bus {
-  constructor(position, markerProvider) {
-    this.latitude = position.latitude;
-    this.longitude = position.longitude;
-    this.currentZoom = 0;
-    this.marker = markerProvider.getBusMarker({position});
+  constructor(markerProvider) {
+    this.latitude = null;
+    this.longitude = null;
+    this.marker = null;
+    this.markerProvider = markerProvider;
   }
 
-  addTo(map) {
-    this.marker.addTo(map);
+  addTo(map, position) {
+    this.latitude = position.latitude;
+    this.longitude = position.longitude;
+    if (!this.marker) {
+      this.marker = this.markerProvider.getBusMarker({position});
+      this.marker.addTo(map);
+    }
+
+    this.marker.setLatLng([position.latitude, position.longitude]);
   }
 
   removeFrom(map) {
-    this.marker.removeFrom(map);
+    if (this.marker) {
+      this.marker.removeFrom(map);
+    }
   }
 }
