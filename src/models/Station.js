@@ -8,7 +8,6 @@ export class Station {
     this.arrivalTimestamp = stationData.arrivalTimestamp;
     this.latitude = stationData.latitude;
     this.longitude = stationData.longitude;
-    this.currentZoom = 0;
     this.positionInTrip = stationData.positionInTrip;
 
     this.marker = markerProvider.getStationIcon({

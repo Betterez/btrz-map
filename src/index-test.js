@@ -4,7 +4,10 @@ import {StationsService} from "../src/services/StationsService";
 import {TripsService} from "../src/services/TripsService";
 import {GPSService} from "../src/services/GPSService";
 import {Station} from "../src/models/Station";
+import {Bus} from "../src/models/Bus";
+import {TravelledPath} from "../src/models/TravelledPath";
 import {Trip} from "../src/models/Trip";
+import {MarkerProvider} from "../src/markers/MarkerProvider";
 import Utils from "../src/utils/utils";
 
 /* This API is exposed to the testing framework so we can access Services, Models, etc and do regression testing.
@@ -18,5 +21,8 @@ export const testAPI = {
   GPSService,
   Station,
   Trip,
+  Bus,
+  TravelledPath,
+  MarkerProvider,
   Utils
 }

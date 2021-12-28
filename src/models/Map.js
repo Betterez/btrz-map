@@ -28,6 +28,7 @@ class Map {
       .then((trip) => {
         this.trip = trip;
         this.trip.addTo(this.leafletMap);
+        return trip;
       })
       .catch((err) => {
         console.log("There was a problem with the trip: ", err);

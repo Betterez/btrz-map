@@ -12,9 +12,9 @@ export class Bus {
     if (!this.marker) {
       this.marker = this.markerProvider.getBusMarker({position});
       this.marker.addTo(map);
+    } else {
+      this.marker.setLatLng([position.latitude, position.longitude]);
     }
-
-    this.marker.setLatLng([position.latitude, position.longitude]);
   }
 
   removeFrom(map) {

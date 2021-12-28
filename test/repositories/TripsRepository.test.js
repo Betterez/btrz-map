@@ -3,14 +3,15 @@ const chance = new Chance();
 const chai = require("chai");
 const expect = chai.expect;
 
-const {TripsRepository, Station, GPSService} = require("../../dist-test/btrz-map-test").testAPI;
+const {TripsRepository, Station, MarkerProvider} = require("../../dist-test/btrz-map-test").testAPI;
 
 describe("TripsRepository", function() {
   describe("#findAsync()", function() {
-    const station1 = new Station({id: "1111", name: "station1", latitude: chance.latitude(), longitude: chance.longitude()});
-    const station2 = new Station({id: "2222", name: "station2", latitude: chance.latitude(), longitude: chance.longitude()});
-    const station3 = new Station({id: "3333", name: "station3", latitude: chance.latitude(), longitude: chance.longitude()});
-    const station4 = new Station({id: "4444", name: "station4", latitude: chance.latitude(), longitude: chance.longitude()});
+    const markerProvider = new MarkerProvider();
+    const station1 = new Station({id: "1111", name: "station1", latitude: chance.latitude(), longitude: chance.longitude()}, markerProvider);
+    const station2 = new Station({id: "2222", name: "station2", latitude: chance.latitude(), longitude: chance.longitude()}, markerProvider);
+    const station3 = new Station({id: "3333", name: "station3", latitude: chance.latitude(), longitude: chance.longitude()}, markerProvider);
+    const station4 = new Station({id: "4444", name: "station4", latitude: chance.latitude(), longitude: chance.longitude()}, markerProvider);
 
     const routeId = chance.guid();
     const scheduleId = chance.guid();
@@ -25,7 +26,8 @@ describe("TripsRepository", function() {
     const tripFromBackend = {
       date,
       scheduleName: scheduleId,
-      routeId
+      routeId,
+      legs: [{}, {}]
     };
 
     const tripsServiceMock = {

@@ -2,6 +2,8 @@ export class Trip {
   constructor({tripFromBackend, stations, bus, travelledPath, gpsService}) {
     this.routeId = tripFromBackend.routeId;
     this.scheduleId = tripFromBackend.scheduleName;
+    this.scheduleName = tripFromBackend.scheduleDisplayName;
+    this.departureTimestamp = tripFromBackend.legs[0].departureTimestamp;
     this.date = tripFromBackend.date;
     this.stations = stations;
     this.travelledPath = null;
