@@ -7,6 +7,7 @@ import {GPSService} from "./services/GPSService";
 import {MarkerProvider} from "../src/markers/MarkerProvider";
 import {Map} from "./models/Map";
 import {Bus} from "./models/Bus";
+import {TravelledPath} from "./models/TravelledPath";
 import {registerCustomControls} from "./customControls";
 import "./leaflet-styles-override.css"
 
@@ -22,6 +23,7 @@ registerCustomControls(L);
 export function init({env, apiKey}) {
   const markerProvider = new MarkerProvider();
   const bus = new Bus(markerProvider);
+  const travelledPath = new TravelledPath(markerProvider);
   const stationsService = new StationsService({apiKey, env});
   const tripsService = new TripsService({apiKey, env});
   const stationsRepository = new StationsRepository({stationsService, markerProvider});
@@ -30,8 +32,8 @@ export function init({env, apiKey}) {
     tripsService,
     stationsRepository,
     gpsService,
-    markerProvider,
-    bus
+    bus,
+    travelledPath
   });
 
   /**

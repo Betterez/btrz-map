@@ -1,7 +1,5 @@
-import {TravelledPath} from "./TravelledPath";
-
 export class Trip {
-  constructor({tripFromBackend, stations, bus, gpsService, markerProvider}) {
+  constructor({tripFromBackend, stations, bus, travelledPath, gpsService}) {
     this.routeId = tripFromBackend.routeId;
     this.scheduleId = tripFromBackend.scheduleName;
     this.date = tripFromBackend.date;
@@ -13,7 +11,7 @@ export class Trip {
     this.autoCenterEnabled =  true;
     this.discardMovement = false;
     this.bus = bus;
-    this.markerProvider = markerProvider;
+    this.travelledPath = travelledPath;
   }
 
   _addStationsTo(map) {
@@ -28,21 +26,10 @@ export class Trip {
     });
   }
 
-  _addTravelledPathTo(map, coordinates) {
-    this._removeTravelledPathFrom(map);
-    this.travelledPath = new TravelledPath(coordinates, this.markerProvider);
-    this.travelledPath.addTo(map);
-  }
-
   _removeTravelledPathFrom(map) {
     if (this.travelledPath) {
       this.travelledPath.removeFrom(map);
     }
-  }
-
-  _addBusTo(map) {
-    this._removeBusFrom(map);
-    this.bus.addTo(map);
   }
 
   _removeBusFrom(map) {
@@ -83,7 +70,7 @@ export class Trip {
       console.log("currentPosition: ", this.currentPosition);
 
       if (position.travelledPath) {
-        this._addTravelledPathTo(map, position.travelledPath);
+        this.travelledPath.addTo(map, position.travelledPath);
       }
 
       if (position.lastKnown) {

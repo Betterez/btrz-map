@@ -26,12 +26,7 @@ export class MarkerProvider {
     return L.marker([position.latitude, position.longitude], {icon});
   }
 
-  getTravelPathPolyline({coordinates, travelledPathRenderOptions}) {
-    const positions = [];
-    for (let i = 0; i < coordinates.length; i++) {
-      const position = coordinates[i];
-      positions.push([position.latitude, position.longitude]);
-    }
-    return L.polyline(positions, travelledPathRenderOptions);
+  getTravelPathPolyline({latLongs, travelledPathRenderOptions}) {
+    return L.polyline(latLongs, travelledPathRenderOptions);
   }
 }
