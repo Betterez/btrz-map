@@ -32,6 +32,8 @@ export class TravelledPath {
   }
 
   removeFrom(map) {
-    this.polyline.removeFrom(map);
+    if (this.polyline) {
+      this.polyline.removeFrom(map);
+    }
   }
 }

@@ -5,6 +5,7 @@ import {TripsService} from "../src/services/TripsService";
 import {GPSService} from "../src/services/GPSService";
 import {Station} from "../src/models/Station";
 import {Bus} from "../src/models/Bus";
+import {Map} from "../src/models/Map";
 import {TravelledPath} from "../src/models/TravelledPath";
 import {Trip} from "../src/models/Trip";
 import {MarkerProvider} from "../src/markers/MarkerProvider";
@@ -24,5 +25,6 @@ export const testAPI = {
   Bus,
   TravelledPath,
   MarkerProvider,
-  Utils
+  Utils,
+  Map
 }

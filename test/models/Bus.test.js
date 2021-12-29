@@ -64,8 +64,7 @@ describe("Bus", () => {
 
   describe("removeFrom", () => {
     it("should not break if no marker is set", () => {
-      bus.removeFrom();
-      expect(1).to.eql(1); //We test that call doesn't throw exception
+      expect(bus.removeFrom.bind(bus)).to.not.throw();
     });
 
     it("should remove the marker", () => {

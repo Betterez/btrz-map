@@ -7,6 +7,7 @@ const marker = {
   addTo: () => {},
   removeFrom: () => {},
   setLatLng: () => {},
+  bindPopup: () => {},
 };
 
 const polyline = {
