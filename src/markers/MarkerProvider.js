@@ -7,6 +7,7 @@ import {
   stationIcon
 } from "../icons/station-icons";
 
+/** This class should be the only one which depends on leaflet **/
 export class MarkerProvider {
   getBusMarker({position}) {
     return L.marker([position.latitude, position.longitude], {icon: busIcon});
@@ -28,5 +29,11 @@ export class MarkerProvider {
 
   getTravelPathPolyline({latLongs, travelledPathRenderOptions}) {
     return L.polyline(latLongs, travelledPathRenderOptions);
+  }
+
+  getCenterControl() {
+    return L.control.centerButton({
+      position: "topleft"
+    });
   }
 }

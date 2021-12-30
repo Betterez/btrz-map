@@ -33,7 +33,8 @@ export function init({env, apiKey}) {
     stationsRepository,
     gpsService,
     bus,
-    travelledPath
+    travelledPath,
+    markerProvider
   });
 
   /**

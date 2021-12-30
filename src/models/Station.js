@@ -1,5 +1,16 @@
 import {timeWithZero} from "../utils/utils"
 
+/**
+ * Class representing a Station in the Trip
+ * @property {string} id - The station id.
+ * @property {string} name - The station name.
+ * @property {string} departureTimestamp - The departure date and time in ISO 8601 date-time format.
+ * @property {string} arrivalTimestamp - The arrival date and time in ISO 8601 date-time format.
+ * @property {number} positionInTrip - zero-indexed position of the station for this trip.
+ * @property {number} latitude - latitude of the station location.
+ * @property {number} longitude - longitude of the station location.
+ *
+ */
 export class Station {
   constructor(stationData, markerProvider) {
     this.id = stationData.id;

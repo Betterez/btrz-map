@@ -1,12 +1,13 @@
 import {Trip} from "../models/Trip";
 
 export class TripsRepository {
-  constructor({stationsRepository, tripsService, gpsService, bus, travelledPath}) {
+  constructor({stationsRepository, tripsService, gpsService, bus, travelledPath, markerProvider}) {
     this.tripsService = tripsService;
     this.stationsRepository = stationsRepository;
     this.gpsService = gpsService;
     this.bus = bus;
     this.travelledPath = travelledPath;
+    this.markerProvider = markerProvider;
   }
 
   findAsync({routeId, scheduleId, date, productId}) {
@@ -29,7 +30,8 @@ export class TripsRepository {
         stations,
         gpsService: this.gpsService,
         bus: this.bus,
-        travelledPath: this.travelledPath
+        travelledPath: this.travelledPath,
+        markerProvider: this.markerProvider
       });
     })
   }

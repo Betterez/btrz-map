@@ -1,5 +1,14 @@
+/**
+ * Class representing a Betterez Trip
+ * @property {string} routeId - The route id for the Trip
+ * @property {string} scheduleId - The schedule id for the Trip
+ * @property {string} scheduleName - The schedule name for the Trip
+ * @property {string} departureTimestamp - The departure date and time in ISO 8601 date-time format
+ * @property {array} stations - List of [stations]{@link Station} for the trip
+ *
+ */
 export class Trip {
-  constructor({tripFromBackend, stations, bus, travelledPath, gpsService}) {
+  constructor({tripFromBackend, stations, bus, travelledPath, gpsService, markerProvider}) {
     this.routeId = tripFromBackend.routeId;
     this.scheduleId = tripFromBackend.scheduleName;
     this.scheduleName = tripFromBackend.scheduleDisplayName;
@@ -14,6 +23,7 @@ export class Trip {
     this.discardMovement = false;
     this.bus = bus;
     this.travelledPath = travelledPath;
+    this.markerProvider = markerProvider;
   }
 
   _addStationsTo(map) {
@@ -76,6 +86,7 @@ export class Trip {
       }
 
       if (position.lastKnown) {
+        console.log("adding bus")
         this.bus.addTo(map, position.lastKnown);
       }
 
@@ -92,6 +103,7 @@ export class Trip {
     }
 
     this.gpsIntervalId = setInterval(() => {
+      console.log("interval running")
       this._updateBusPosition(map);
     }, 10000);
 
@@ -113,9 +125,7 @@ export class Trip {
     console.log("adding center control");
     this._removeCenterButton();
 
-    this.centerControl = L.control.centerButton({
-      position: "topleft"
-    });
+    this.centerControl = this.markerProvider.getCenterControl();
     this.centerControl.addTo(map);
     this.centerControl.getContainer().onclick = () => {
       console.log("user pressed center button");

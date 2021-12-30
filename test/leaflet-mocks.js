@@ -16,9 +16,20 @@ const polyline = {
   setLatLngs: () => {},
 };
 
+const control = {
+  addTo: () => {},
+  remove: () => {},
+  getContainer: () => {
+    return {
+      onclick: () => {}
+    };
+  },
+};
+
 module.exports = {
   map,
   marker,
-  polyline
+  polyline,
+  control
 }
 
