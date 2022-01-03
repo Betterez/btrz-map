@@ -95,8 +95,25 @@ For ```leaflet```, all the files you need are located under ```node_modules/leaf
   })
   .then((_trip) => {
     trip = _trip;
-  })
-
+  });
+  
+  /* trip includes the folowing props for convenience
+    trip.routeId
+    trip.scheduleId
+    trip.scheduleName
+    trip.departureTimestamp
+    trip.stations
+    
+    and each station includes:
+    station.id
+    station.name
+    station.departureTimestamp
+    station.arrivalTimestamp
+    station.latitude
+    station.longitude
+    station.positionInTrip
+  */
+  
   // ..after you are done with the map, remove the trip from the map to free resources.
   // map.removeTrip(trip);
 

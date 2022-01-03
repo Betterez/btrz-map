@@ -12,7 +12,7 @@
     "preversion": "npm test && npm run build && npm run commit-build && npm run generate-docs && npm run commit-docs",
     "postversion": "git push origin main && git push --tags",
     "version": "git tag $1",
-    "generate-docs": "rm docs/API.md && node_modules/.bin/jsdoc2md --no-cache src/index.js src/models/Map.js >> docs/API.md"
+    "generate-docs": "rm docs/API.md && node_modules/.bin/jsdoc2md --no-cache src/index.js src/models/Map.js src/models/Trip.js src/models/Station.js >> docs/API.md"
   },
   "repository": {
     "type": "git",

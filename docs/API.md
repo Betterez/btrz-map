@@ -4,6 +4,12 @@
 <dt><a href="#Map">Map</a></dt>
 <dd><p>Class representing a Betterez Map.</p>
 </dd>
+<dt><a href="#Trip">Trip</a></dt>
+<dd><p>Class representing a Betterez Trip</p>
+</dd>
+<dt><a href="#Station">Station</a></dt>
+<dd><p>Class representing a Station in the Trip</p>
+</dd>
 </dl>
 
 ## Functions
