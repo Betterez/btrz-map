@@ -49,7 +49,7 @@ export class Trip {
   }
 
   _getFirstStation() {
-    return this.stations.find((s) => s.positionInTrip === 0);
+    return this.stations[0];
   }
 
   _discardMovement() {

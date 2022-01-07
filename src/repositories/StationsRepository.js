@@ -8,7 +8,9 @@ export class StationsRepository {
 
   findAsync(legs) {
     const stationsMap = {};
-    const sortedLegs = legs.slice().sort((l1, l2) => l1.legord < l2.legord ? -1 : 1);
+    const sortedLegs = legs.slice().sort((l1, l2) => {
+      return l1.departureTimestamp < l2.departureTimestamp ? -1 : 1
+    });
     for (let i = 0; i < sortedLegs.length; i++) {
       const leg = sortedLegs[i];
       const isFirstLeg = i === 0;
@@ -31,7 +33,7 @@ export class StationsRepository {
         stationsMap[toId] = {
           id: toId,
           name: leg.to,
-          positionInTrip: leg.legord + 1,
+          positionInTrip: leg.legord ? leg.legord + 1 : undefined,
           departureTimestamp: isLastLeg ? null : sortedLegs[i+1].departureTimestamp,
           arrivalTimestamp: leg.arrivalTimestamp,
           isLastStation: isLastLeg
