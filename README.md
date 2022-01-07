@@ -115,13 +115,15 @@ For ```leaflet```, all the files you need are located under ```node_modules/leaf
   */
   
   // ..after you are done with the map, remove the trip from the map to free resources.
-  // map.removeTrip(trip);
+  // map.removeTrip();
 
   // Optional: All times are showed in local timezone, it is recommended to make it clear somewhere in the page/
   const timezoneDiv = document.getElementById("timezoneNote");
   timezoneDiv.innerHTML = "All times are in  " + Intl.DateTimeFormat().resolvedOptions().timeZone + " time";
 </script>
 ```
+Note: Only one trip at a time is allowed on the map.
+
 ### API
 Please check the [API docs](docs/API.md)
 
