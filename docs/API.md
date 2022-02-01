@@ -2,13 +2,25 @@
 
 <dl>
 <dt><a href="#Map">Map</a></dt>
-<dd><p>Class representing a Betterez Map.</p>
+<dd><p>Class representing a Betterez Map. It is a wrapper around the leaflet map</p>
 </dd>
 <dt><a href="#Trip">Trip</a></dt>
-<dd><p>Class representing a Betterez Trip</p>
+<dd><p>Class representing a Betterez Trip. It exposes the following props for convenience:</p>
+<p>routeId,</p>
+<p>scheduleId,</p>
+<p>scheduleName,</p>
+<p>departureTimestamp - The departure date and time in ISO 8601 date-time format,</p>
+<p>stations - List of <a href="#Station">stations</a> for the trip</p>
 </dd>
 <dt><a href="#Station">Station</a></dt>
-<dd><p>Class representing a Station in the Trip</p>
+<dd><p>Class representing a Station in the Trip. It exposes the following props for convenience:</p>
+<p>id - The station id.</p>
+<p>name - The station name.</p>
+<p>departureTimestamp - The departure date and time in ISO 8601 date-time format.</p>
+<p>arrivalTimestamp - The arrival date and time in ISO 8601 date-time format.</p>
+<p>positionInTrip - zero-indexed position of the station for this trip.</p>
+<p>latitude - latitude of the station location.</p>
+<p>longitude - longitude of the station location.</p>
 </dd>
 </dl>
 
@@ -23,23 +35,23 @@
 <a name="Map"></a>
 
 ## Map
-Class representing a Betterez Map.
+Class representing a Betterez Map. It is a wrapper around the leaflet map
 
 **Kind**: global class  
 
 * [Map](#Map)
-    * [.addTrip(tripOptions)](#Map+addTrip) ⇒ <code>Object</code>
+    * [.addTrip(tripOptions)](#Map+addTrip) ⇒ [<code>Trip</code>](#Trip)
     * [.removeTrip()](#Map+removeTrip)
 
 <a name="Map+addTrip"></a>
 
-### map.addTrip(tripOptions) ⇒ <code>Object</code>
+### map.addTrip(tripOptions) ⇒ [<code>Trip</code>](#Trip)
 Shows the current bus position on the map for the specified trip. If trip is not started will show only the stations.
 
 After you are done with this trip, please call [removeTrip](removeTrip) to free resources and stop listeners.
 
 **Kind**: instance method of [<code>Map</code>](#Map)  
-**Returns**: <code>Object</code> - A trip instance.  
+**Returns**: [<code>Trip</code>](#Trip) - A trip instance.  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -71,11 +83,11 @@ Initializes the lib. This is your entry point.
 
 <a name="init..map"></a>
 
-### init~map(btrzMapOptions) ⇒ <code>Object</code>
+### init~map(btrzMapOptions) ⇒ [<code>Map</code>](#Map)
 Builds and returns the map interface. This is a Betterez Map, not the leaflet map.
 
 **Kind**: inner method of [<code>init</code>](#init)  
-**Returns**: <code>Object</code> - The Betterez Map. It is a wrapper around the leaflet map  
+**Returns**: [<code>Map</code>](#Map) - A Betterez Map instance. It is a wrapper around the leaflet map  
 
 | Param | Type | Description |
 | --- | --- | --- |

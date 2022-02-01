@@ -1,4 +1,4 @@
-/** Class representing a Betterez Map. */
+/** Class representing a Betterez Map. It is a wrapper around the leaflet map */
 class Map {
   constructor({leafletMap, tripsRepository}) {
     this.leafletMap = leafletMap;
@@ -15,7 +15,7 @@ class Map {
    * @param {string} tripOptions.scheduleId - Id of the schedule for the trip you want to show.
    * @param {string} tripOptions.date - Date of departure for the trip in format "YYYY-MM-DD".
    * @param {string} tripOptions.productId - Product id enabled for that trip".
-   * @returns {Object} A trip instance.
+   * @returns {Trip} A trip instance.
    */
   addTrip({routeId, scheduleId, date, productId}) {
     this.removeTrip();

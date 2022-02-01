@@ -1,11 +1,15 @@
 /**
- * Class representing a Betterez Trip
- * @property {string} routeId - The route id for the Trip
- * @property {string} scheduleId - The schedule id for the Trip
- * @property {string} scheduleName - The schedule name for the Trip
- * @property {string} departureTimestamp - The departure date and time in ISO 8601 date-time format
- * @property {array} stations - List of [stations]{@link Station} for the trip
+ * Class representing a Betterez Trip. It exposes the following props for convenience:
  *
+ * routeId,
+ *
+ * scheduleId,
+ *
+ * scheduleName,
+ *
+ * departureTimestamp - The departure date and time in ISO 8601 date-time format,
+ *
+ * stations - List of [stations]{@link Station} for the trip
  */
 export class Trip {
   constructor({tripFromBackend, stations, bus, travelledPath, gpsService, markerProvider}) {

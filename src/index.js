@@ -43,7 +43,7 @@ export function init({env, apiKey}) {
    * @param {string} btrzMapOptions.containerId - Id of the HTML element that is going to contain the map.
    * @param {string} btrzMapOptions.tilesProviderUrl - Url of the map tiles provider.
    * @param {string} btrzMapOptions.attribution - Attribution to the map tiles provider to show on the map. Check your map tiles provider docs.
-   * @returns {Object} The Betterez Map. It is a wrapper around the leaflet map
+   * @returns {Map} A Betterez Map instance. It is a wrapper around the leaflet map
    */
   function map({containerId, tilesProviderUrl, attribution}) {
     if (!L) {

@@ -132,6 +132,11 @@ Please check the [API docs](docs/API.md)
 #### Run test
 ```npm test```
 
+#### Generate API docs
+Only if you modified some JSDocs. It reads the JSDocs and generate MD doc file under docs/API.md.
+
+```npm run generate-docs```
+
 #### Build
 ```npm run build```
 
