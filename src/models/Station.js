@@ -1,4 +1,4 @@
-import {timeWithZero} from "../utils/utils"
+import {timeWithZero, validateCoordinates} from "../utils/utils"
 
 /**
  * Class representing a Station in the Trip. It exposes the following props for convenience:
@@ -16,6 +16,8 @@ import {timeWithZero} from "../utils/utils"
  * latitude - latitude of the station location.
  *
  * longitude - longitude of the station location.
+ *
+ * Throws an error if latitude or longitude are invalid
  */
 export class Station {
   constructor(stationData, markerProvider) {
@@ -23,6 +25,10 @@ export class Station {
     this.name = stationData.name;
     this.departureTimestamp = stationData.departureTimestamp;
     this.arrivalTimestamp = stationData.arrivalTimestamp;
+    validateCoordinates({
+      latitude: stationData.latitude,
+      longitude: stationData.longitude
+    });
     this.latitude = stationData.latitude;
     this.longitude = stationData.longitude;
     this.positionInTrip = stationData.positionInTrip;
