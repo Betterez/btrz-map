@@ -25,10 +25,6 @@ export class Station {
     this.name = stationData.name;
     this.departureTimestamp = stationData.departureTimestamp;
     this.arrivalTimestamp = stationData.arrivalTimestamp;
-    validateCoordinates({
-      latitude: stationData.latitude,
-      longitude: stationData.longitude
-    });
     this.latitude = stationData.latitude;
     this.longitude = stationData.longitude;
     this.positionInTrip = stationData.positionInTrip;
@@ -43,20 +39,28 @@ export class Station {
       const ETD = new Date(this.departureTimestamp);
       const hours = ETD.getHours();
       const minutes = timeWithZero(ETD.getMinutes());
-      this.marker.bindPopup(`<b>${this.name}</b><br>ETD ${hours}:${minutes} hs.`);
+      if (this.marker) {
+        this.marker.bindPopup(`<b>${this.name}</b><br>ETD ${hours}:${minutes} hs.`);
+      }
     } else {
       const ETA = new Date(this.arrivalTimestamp);
       const hours = ETA.getHours();
       const minutes = timeWithZero(ETA.getMinutes());
-      this.marker.bindPopup(`<b>${this.name}</b><br>ETA ${hours}:${minutes} hs.`);
+      if (this.marker) {
+        this.marker.bindPopup(`<b>${this.name}</b><br>ETA ${hours}:${minutes} hs.`);
+      }
     }
   }
 
   addTo(map) {
-    this.marker.addTo(map);
+    if (this.marker) {
+      this.marker.addTo(map);
+    }
   }
 
   removeFrom(map) {
-    this.marker.removeFrom(map);
+    if (this.marker) {
+      this.marker.removeFrom(map);
+    }
   }
 }

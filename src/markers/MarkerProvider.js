@@ -7,10 +7,21 @@ import {
   stationIcon
 } from "../icons/station-icons";
 
+import {validateCoordinates} from "../utils/utils";
+
 /** This class should be the only one which depends on leaflet **/
 export class MarkerProvider {
   getBusMarker({position}) {
-    return L.marker([position.latitude, position.longitude], {icon: busIcon});
+    try {
+      validateCoordinates({
+        latitude: position.latitude,
+        longitude: position.longitude
+      })
+      return L.marker([position.latitude, position.longitude], {icon: busIcon});
+    } catch(error) {
+      console.log("can't get a marker for bus: ", error);
+      return null;
+    }
   }
 
   getStationIcon({position, isLastStation, isFirstStation}) {
@@ -24,7 +35,16 @@ export class MarkerProvider {
       icon = stationIcon;
     }
 
-    return L.marker([position.latitude, position.longitude], {icon});
+    try {
+      validateCoordinates({
+        latitude: position.latitude,
+        longitude: position.longitude
+      })
+      return L.marker([position.latitude, position.longitude], {icon});
+    } catch(error) {
+      console.log("can't get a marker for station: ", error);
+      return null;
+    }
   }
 
   getTravelPathPolyline({latLongs, travelledPathRenderOptions}) {

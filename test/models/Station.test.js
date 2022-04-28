@@ -80,15 +80,6 @@ describe("Station", () => {
       const minutes = Utils.timeWithZero(ETA.getMinutes());
       expect(marker.bindPopup.calledWith(`<b>${stationData.name}</b><br>ETA ${hours}:${minutes} hs.`)).to.be.true;
     });
-
-    it("should throw an exception when bad coordinates are provided", () => {
-      stationData.longitude = "87987898";
-      function SUT() {
-        return new Station(stationData, markerProvider);
-      }
-
-      expect(SUT).to.throw(`${stationData.longitude} is not a valid longitude. Should be between -180 and 180`);
-    });
   });
 
   describe("addTo", () => {

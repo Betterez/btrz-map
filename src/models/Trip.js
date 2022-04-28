@@ -11,6 +11,8 @@
  *
  * stations - List of [stations]{@link Station} for the trip
  */
+import {validateCoordinates} from "../utils/utils";
+
 export class Trip {
   constructor({tripFromBackend, stations, bus, travelledPath, gpsService, markerProvider}) {
     this.routeId = tripFromBackend.routeId;
@@ -63,13 +65,27 @@ export class Trip {
 
   _centerMap(map) {
     this._discardMovement();
+    let centerPoint = null;
     if (this.currentPosition && this.currentPosition.lastKnown) {
       console.log("centering map on current position")
-      map.setView([this.currentPosition.lastKnown.latitude, this.currentPosition.lastKnown.longitude], 14);
+      centerPoint = {
+        latitude: this.currentPosition.lastKnown.latitude,
+        longitude: this.currentPosition.lastKnown.longitude
+      }
     } else {
       console.log("centering map on first station")
       const firstStation = this._getFirstStation();
-      map.setView([firstStation.latitude, firstStation.longitude], 14);
+      centerPoint = {
+        latitude: firstStation.latitude,
+        longitude: firstStation.longitude
+      }
+    }
+
+    try {
+      validateCoordinates(centerPoint);
+      map.setView([centerPoint.latitude, centerPoint.longitude], 14);
+    } catch(error) {
+      console.log("Couldn't center map because: ", error);
     }
   }
 

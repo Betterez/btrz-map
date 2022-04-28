@@ -32,8 +32,7 @@ describe("StationsRepository", function() {
       const repository = new StationsRepository({stationsService: stationsServiceMock, markerProvider})
       return repository.findAsync(legs)
         .then((stations) => {
-          // Station 2 wont show up on the map because it have an invalid latitude
-          expect(stations.length).to.equal(3);
+          expect(stations.length).to.equal(4);
 
           expect(stations[0].id).to.equal("1111");
           expect(stations[0].name).to.equal("station1");
@@ -41,17 +40,23 @@ describe("StationsRepository", function() {
           expect(stations[0].arrivalTimestamp).to.be.null;
           expect(stations[0].positionInTrip).to.equal(1);
 
-          expect(stations[1].id).to.equal("3333");
-          expect(stations[1].name).to.equal("station3");
-          expect(stations[1].departureTimestamp).to.equal("2020-01-01T22:05:00");
-          expect(stations[1].arrivalTimestamp).to.equal("2020-01-01T22:00:00");
-          expect(stations[1].positionInTrip).to.equal(3);
+          expect(stations[1].id).to.equal("2222");
+          expect(stations[1].name).to.equal("station2");
+          expect(stations[1].departureTimestamp).to.equal("2020-01-01T21:05:00");
+          expect(stations[1].arrivalTimestamp).to.equal("2020-01-01T21:00:00");
+          expect(stations[1].positionInTrip).to.equal(2);
 
-          expect(stations[2].id).to.equal("4444");
-          expect(stations[2].name).to.equal("station4");
-          expect(stations[2].departureTimestamp).to.equal(null);
-          expect(stations[2].arrivalTimestamp).to.equal("2020-01-01T22:30:00");
-          expect(stations[2].positionInTrip).to.equal(4);
+          expect(stations[2].id).to.equal("3333");
+          expect(stations[2].name).to.equal("station3");
+          expect(stations[2].departureTimestamp).to.equal("2020-01-01T22:05:00");
+          expect(stations[2].arrivalTimestamp).to.equal("2020-01-01T22:00:00");
+          expect(stations[2].positionInTrip).to.equal(3);
+
+          expect(stations[3].id).to.equal("4444");
+          expect(stations[3].name).to.equal("station4");
+          expect(stations[3].departureTimestamp).to.equal(null);
+          expect(stations[3].arrivalTimestamp).to.equal("2020-01-01T22:30:00");
+          expect(stations[3].positionInTrip).to.equal(4);
         });
     });
   });

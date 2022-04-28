@@ -51,16 +51,7 @@ export class StationsRepository {
         return Object.values(stationsMap);
       })
       .then((stations) => {
-        return stations.map((station) => {
-          try {
-            return new Station(station, this.markerProvider);
-          } catch (error) {
-            console.log(error);
-            return null;
-            // stations with bad data won't show up on the map
-          }
-        })
-          .filter(s => Boolean(s));
+        return stations.map((station) => new Station(station, this.markerProvider));
       });
   }
 }
